@@ -1,0 +1,33 @@
+<?php
+
+use App\Http\Controllers\PendudukController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
+
+Route::get('/', 'App\Http\Controllers\AuthController@loginPenduduk');
+Route::get('/loginAdmin', 'App\Http\Controllers\AuthController@loginAdmin');
+Route::post('/loginProsesAdmin', 'App\Http\Controllers\AuthController@loginProsesAdmin');
+Route::post('/loginProsesPenduduk', 'App\Http\Controllers\AuthController@loginProsesPenduduk');
+Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
+
+// Route::resource('penduduk', PendudukController::class);
+Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
+Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
+Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
+Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
+Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
+Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
+
+
