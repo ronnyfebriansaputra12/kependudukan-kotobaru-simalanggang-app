@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('penduduks', function (Blueprint $table) {
             $table->id('nik');
+            $table->string('uid',50);
             $table->string('no_kk')->unique()->nullable();
             $table->string('password');
             $table->string('password_confirmation');

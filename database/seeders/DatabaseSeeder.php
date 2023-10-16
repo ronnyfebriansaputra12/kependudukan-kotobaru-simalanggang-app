@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Penduduk::factory()->create([
+            'uid' => 'qwerty1234',
             'nik' => '112233445566',
             'no_kk' => '2131231233',
             'password' => bcrypt('qwerty123'),
@@ -50,6 +51,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Penduduk::factory()->create([
+            'uid' => 'qwerty1234',
             'nik' => '77665544332211',
             'no_kk' => '1231231233',
             'password' => bcrypt('qwerty123'),
