@@ -13,10 +13,23 @@
                 Penduduk
             </div>
             <div class="card-body">
-                <form action="/penduduk" method="post" class="needs-validation" novalidate>
+                <form action="{{ url('penduduk') }}" method="post" class="needs-validation" novalidate>
                     @csrf
                     <div class="container">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label for="uid" class="form-label">UID</label>
+                                    <input type="number" class="form-control @error('uid') is-invalid @enderror"
+                                        id="uid" value="{{ old('uid') }}" name="uid"
+                                         autofocus required>
+                                    @error('uid')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="mb-4">
                                     <label for="nik" class="form-label">NIK</label>

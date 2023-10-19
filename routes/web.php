@@ -22,12 +22,14 @@ Route::post('/loginProsesAdmin', 'App\Http\Controllers\AuthController@loginProse
 Route::post('/loginProsesPenduduk', 'App\Http\Controllers\AuthController@loginProsesPenduduk');
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 
-// Route::resource('penduduk', PendudukController::class);
-Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
-Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
-Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
-Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
-Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
-Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
+Route::resource('penduduk', PendudukController::class);
+// Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
+// Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
+// Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
+// Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
+// Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
+// Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
+
+Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
 
 
