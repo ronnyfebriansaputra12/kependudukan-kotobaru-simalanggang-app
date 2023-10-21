@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PenduduksImport;
 use App\Models\Penduduk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PendudukController extends Controller
 {
@@ -48,8 +50,7 @@ class PendudukController extends Controller
             'hub_kel' => 'required|nullable',
             'alamat' => 'required|nullable|max:255',
             'pekerjaan' => 'required|nullable|max:255',
-            'desa' => 'required|nullable|max:255',
-            'kelurahan' => 'required|nullable|max:255',
+            'desa_kelurahan' => 'required|nullable|max:255',
             'dusun' => 'required|nullable|max:255',
 
         ]);
@@ -153,5 +154,12 @@ class PendudukController extends Controller
         Penduduk::create($data);
 
         return response()->json(['message' => 'Data berhasil disimpan']);
+    }
+
+    public function importExcel(Request $request)
+    {
+        // dd($request->file('file'));
+        Excel::import(new PenduduksImport, $request->file('file'));
+        return redirect('/penduduk');
     }
 }

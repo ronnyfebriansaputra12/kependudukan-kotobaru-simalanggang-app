@@ -44,8 +44,7 @@ class DatabaseSeeder extends Seeder
             'hub_kel' => 'anak',
             'alamat' => 'padang',
             'pekerjaan' => 'mahasiswa',
-            'desa' => null,
-            'kelurahan' => 'koto tangah',
+            'desa_kelurahan' => 'payakumbuh',
             'dusun' => null,
 
         ]);
@@ -64,8 +63,7 @@ class DatabaseSeeder extends Seeder
             'hub_kel' => 'anak',
             'alamat' => 'padang',
             'pekerjaan' => 'mahasiswa',
-            'desa' => null,
-            'kelurahan' => 'koto tangah',
+            'desa_kelurahan' => 'payakumbuh',
             'dusun' => null,
 
         ]);
