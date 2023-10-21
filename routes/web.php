@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PencarianController;
 use App\Http\Controllers\PendudukController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,23 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
-
-Route::get('/', 'App\Http\Controllers\AuthController@loginPenduduk');
+Route::get('/', [PencarianController::class, 'index']);
+Route::get('/login', 'App\Http\Controllers\AuthController@loginPenduduk')->name('login');;
 Route::get('/loginAdmin', 'App\Http\Controllers\AuthController@loginAdmin');
 Route::post('/loginProsesAdmin', 'App\Http\Controllers\AuthController@loginProsesAdmin');
 Route::post('/loginProsesPenduduk', 'App\Http\Controllers\AuthController@loginProsesPenduduk');
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 
-// Route::resource('penduduk', PendudukController::class);
-Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
-Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
-Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
-Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
-Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
-Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
-Route::post('/penduduk-excel', [PendudukController::class,'importExcel']);
+Route::middleware(['auth'])->group(function () {
+  Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
+  // Route::resource('penduduk', PendudukController::class);
+  Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
+  Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
+  Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
+  Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
+  Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
+  Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
+  Route::post('/penduduk-excel', [PendudukController::class, 'importExcel']);
 
-Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
-
-
+  Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
+});
