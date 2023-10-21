@@ -13,10 +13,23 @@
                 Penduduk
             </div>
             <div class="card-body">
-                <form action="/penduduk" method="post" class="needs-validation" novalidate>
+                <form action="{{ url('penduduk') }}" method="post" class="needs-validation" novalidate>
                     @csrf
                     <div class="container">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label for="uid" class="form-label">UID</label>
+                                    <input type="number" class="form-control @error('uid') is-invalid @enderror"
+                                        id="uid" value="{{ old('uid') }}" name="uid"
+                                         autofocus required>
+                                    @error('uid')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="mb-4">
                                     <label for="nik" class="form-label">NIK</label>
@@ -125,7 +138,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label for="tgl_lahir" class="form-label">Jenis Kelamin</label>
+                                    <label for="jekel" class="form-label">Jenis Kelamin</label>
                                     <select class="form-select" required name="jekel" aria-label="Default select example">
                                         <option selected>Jenis Kelamin</option>
                                         <option value="Laki-Laki">Laki-Laki</option>
@@ -166,25 +179,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label for="desa" class="form-label">Desa</label>
-                                    <input type="text" class="form-control @error('desa') is-invalid @enderror"
-                                        id="desa" value="{{ old('desa') }}" name="desa"
+                                    <label for="desa_kelurahan" class="form-label">Desa/Kelurahan</label>
+                                    <input type="text" class="form-control @error('desa_kelurahan') is-invalid @enderror"
+                                        id="desa_kelurahan" value="{{ old('desa_kelurahan') }}" name="desa_kelurahan"
                                         placeholder="Nama Desa" autofocus required>
                                 </div>
-                                @error('desa')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label for="kelurahan" class="form-label">Kelurahan</label>
-                                    <input type="text" class="form-control @error('kelurahan') is-invalid @enderror"
-                                        id="kelurahan" value="{{ old('kelurahan') }}" name="kelurahan"
-                                        placeholder="Kelurahan" autofocus required>
-                                </div>
-                                @error('kelurahan')
+                                @error('desa_kelurahan')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

@@ -12,21 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penduduks', function (Blueprint $table) {
-            $table->id('nik');
-            $table->string('uid',50);
-            $table->string('no_kk')->unique()->nullable();
-            $table->string('password');
-            $table->string('password_confirmation');
+            $table->id('nik')->unique();
+            $table->string('uid', 10)->nullable();
+            $table->string('no_kk')->nullable();
+            $table->string('password')->default('');
+            $table->string('password_confirmation')->default('');
             $table->string('nama');
             $table->string('tmp_lahir')->nullable();
             $table->date('tgl_lahir')->nullable();
-            $table->enum('jekel',['Laki-laki','Perempuan'])->nullable();
+            $table->string('jekel')->nullable();
             $table->string('ibu_kandung')->nullable();
             $table->string('hub_kel')->nullable();
             $table->string('alamat')->nullable();
             $table->string('pekerjaan')->nullable();
-            $table->string('desa')->nullable();
-            $table->string('kelurahan')->nullable();
+            $table->string('desa_kelurahan')->nullable();
             $table->string('dusun')->nullable();
             $table->timestamps();
         });

@@ -29,5 +29,8 @@ Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
 Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
 Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
 Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
+Route::post('/penduduk-excel', [PendudukController::class,'importExcel']);
+
+Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
 
 

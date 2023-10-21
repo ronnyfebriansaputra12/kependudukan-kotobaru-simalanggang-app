@@ -11,7 +11,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $penduduk = session('penduduk');
+        return view('dashboard', compact('penduduk'));
     }
 
     /**
