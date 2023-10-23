@@ -16,13 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PencarianController::class, 'index']);
-Route::get('/login', 'App\Http\Controllers\AuthController@loginPenduduk')->name('login');;
-Route::get('/loginAdmin', 'App\Http\Controllers\AuthController@loginAdmin');
-Route::post('/loginProsesAdmin', 'App\Http\Controllers\AuthController@loginProsesAdmin');
-Route::post('/loginProsesPenduduk', 'App\Http\Controllers\AuthController@loginProsesPenduduk');
+Route::middleware(['AfterLogin'])->group(function () {
+
+  Route::get('/login', 'App\Http\Controllers\AuthController@loginPenduduk')->name('login');;
+  Route::get('/loginAdmin', 'App\Http\Controllers\AuthController@loginAdmin');
+  Route::post('/loginProsesAdmin', 'App\Http\Controllers\AuthController@loginProsesAdmin');
+  Route::post('/loginProsesPenduduk', 'App\Http\Controllers\AuthController@loginProsesPenduduk');
+});
+
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 
-Route::middleware(['auth'])->group(function () {
+
+Route::middleware(['isLogin'])->group(function () {
   Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
   // Route::resource('penduduk', PendudukController::class);
   Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
