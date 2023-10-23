@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PencarianController;
 use App\Http\Controllers\PendudukController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +39,9 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
   Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
   Route::post('/penduduk-excel', [PendudukController::class, 'importExcel']);
+
+  Route::get('/profilePenduduk', [UserController::class, 'profilePenduduk']);
+  Route::put('/changePassword', [UserController::class, 'changePassword']);
 
   Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
 });

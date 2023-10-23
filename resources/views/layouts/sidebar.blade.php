@@ -26,13 +26,13 @@
                     @php
                         $penduduk = session('penduduk');
                     @endphp
-                    <p>{{ $penduduk->nama }}</p>
+                    <a href="/profilePenduduk" style="text-decoration: none;">{{ $penduduk->nama }}</a>
                 @endif
                 @if (session()->has('admin'))
                     @php
                         $admin = session('admin');
                     @endphp
-                    <p>{{ $admin->name }}</p>
+                    <a href="/profile" style="text-decoration: none;">{{ $admin->nama }}</a>
                 @endif
             </div>
 
