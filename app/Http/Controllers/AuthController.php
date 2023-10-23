@@ -51,6 +51,7 @@ class AuthController extends Controller
         ]);
 
         $penduduks = Penduduk::where('nik', $validasiPenduduk['nik'])->first();
+        // dd($penduduks);
         if (Auth::guard('penduduk')->attempt($validasiPenduduk)) {
             $request->session()->regenerate();
             Alert::toast('Login Berhasil', 'success');

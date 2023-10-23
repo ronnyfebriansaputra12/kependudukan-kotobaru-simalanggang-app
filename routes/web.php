@@ -22,7 +22,7 @@ Route::post('/loginProsesAdmin', 'App\Http\Controllers\AuthController@loginProse
 Route::post('/loginProsesPenduduk', 'App\Http\Controllers\AuthController@loginProsesPenduduk');
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware([])->group(function () {
   Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
   // Route::resource('penduduk', PendudukController::class);
   Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
