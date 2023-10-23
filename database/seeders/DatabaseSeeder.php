@@ -30,42 +30,5 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        \App\Models\Penduduk::factory()->create([
-            // 'uid' => 'qwerty1234',
-            'nik' => '112233445566',
-            'no_kk' => '2131231233',
-            'password' => bcrypt('qwerty123'),
-            'password_confirmation' => bcrypt('qwerty123'),
-            'nama' => 'penduduk1',
-            'tmp_lahir' => 'padang',
-            'tgl_lahir' => '2002-08-03',
-            'jekel' => 'Laki-laki',
-            'ibu_kandung' => 'ibu1',
-            'hub_kel' => 'anak',
-            'alamat' => 'padang',
-            'pekerjaan' => 'mahasiswa',
-            'desa_kelurahan' => 'payakumbuh',
-            'dusun' => null,
-
-        ]);
-
-        \App\Models\Penduduk::factory()->create([
-            // 'uid' => 'qwerty1234',
-            'nik' => '77665544332211',
-            'no_kk' => '1231231233',
-            'password' => bcrypt('qwerty123'),
-            'password_confirmation' => bcrypt('qwerty123'),
-            'nama' => 'penduduk2',
-            'tmp_lahir' => 'padang',
-            'tgl_lahir' => '2002-08-03',
-            'jekel' => 'Laki-laki',
-            'ibu_kandung' => 'ibu1',
-            'hub_kel' => 'anak',
-            'alamat' => 'padang',
-            'pekerjaan' => 'mahasiswa',
-            'desa_kelurahan' => 'payakumbuh',
-            'dusun' => null,
-
-        ]);
     }
 }

@@ -19,6 +19,7 @@ class AuthController extends Controller
     {
         $penduduk = Penduduk::where('nik',$nik)->first();
         return view('auth.login.Penduduk.index', ['penduduk' => $penduduk]);
+        
     }
 
     function loginProsesAdmin(Request $request)

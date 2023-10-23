@@ -18,7 +18,7 @@
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror"
-                        value="{{ $penduduk->nik }}" placeholder="NIK">
+                        value="{{ old('password', $penduduk->nik) }}" placeholder="NIK">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="input-group mb-3">
                     <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                        placeholder="Password" value="{{ old('password') }}">
+                        placeholder="Password" value="{{ old('password', 123456) }}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>

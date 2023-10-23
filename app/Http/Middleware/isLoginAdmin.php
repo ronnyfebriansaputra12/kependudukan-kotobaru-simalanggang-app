@@ -8,19 +8,19 @@ use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Symfony\Component\HttpFoundation\Response;
 
-class isLogin
+class isLoginAdmin
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
-        if (session()->has('penduduk') || session()->has('admin')) {
+        if (Auth::guard('web')->check()) {
             return $next($request);
         }
         Alert::error('Anda Harus Login Terlebih Dahulu');
-        return redirect('/');
+        return redirect('/login');
     }
 }
