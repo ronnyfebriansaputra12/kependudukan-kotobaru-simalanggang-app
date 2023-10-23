@@ -27,7 +27,7 @@
                 <!-- /.col -->
 
 
-                <div class="col-md-8">
+                {{-- <div class="col-md-8">
                     <!-- About Me Box -->
                     <div class="card card-warning">
                         <div class="card-header">
@@ -40,11 +40,130 @@
 
 
                         </div>
+                       
+
                     </div>
                     <!-- /.card -->
+                </div> --}}
+                <div class="col-md-8">
+                    <!-- About Me Box -->
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Profile</h3>
+
+                            <button type="button" class="btn btn-primary btn-sm float-right mr-3" data-bs-toggle="modal"
+                                data-bs-target="#modalChangePassword{{ $profile->nik }}">
+                                <i class="fas fa-key"></i> Change Password
+                            </button>
+                        </div>
+
+                        <div class="card-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- Left column -->
+                                        <div class="form-group">
+                                            <label for="uid">UID</label>
+                                            <input type="text" name="uid" class="form-control"
+                                                value="{{ $profile->uid }}" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="nik">NIK</label>
+                                            <input type="text" name="nik" class="form-control"
+                                                value="{{ $profile->nik }}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tmp_lahir">Tempat Lahir</label>
+                                            <input type="text" name="tmp_lahir" class="form-control"
+                                                value="{{ $profile->tmp_lahir }}" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="jekel">Jenis Kelamin</label>
+                                            <input type="text" name="jekel" class="form-control"
+                                                value="{{ $profile->jekel }}" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="alamat">Alamat</label>
+                                            <input type="text" name="alamat" class="form-control"
+                                                value="{{ $profile->alamat }}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="desa_kelurahan">Desa/Kelurahan</label>
+                                            <input type="text" name="desa_kelurahan" class="form-control"
+                                                value="{{ $profile->desa_kelurahan }}" readonly>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <!-- Right column -->
+                                        <div class="form-group">
+                                            <label for="no_kk">No. KK</label>
+                                            <input type="text" name="no_kk" class="form-control"
+                                                value="{{ $profile->no_kk }}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nama">Nama</label>
+                                            <input type="text" name="nama" class="form-control"
+                                                value="{{ $profile->nama }}" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="tgl_lahir">Tanggal Lahir</label>
+                                            <input type="text" name="tgl_lahir" class="form-control"
+                                                value="{{ $profile->tgl_lahir }}" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="hub_kel">Hubungan Keluarga</label>
+                                            <input type="text" name="hub_kel" class="form-control"
+                                                value="{{ $profile->hub_kel }}" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="pekerjaan">Pekerjaan</label>
+                                            <input type="text" name="pekerjaan" class="form-control"
+                                                value="{{ $profile->pekerjaan }}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="dusun">Dusun</label>
+                                        <input type="text" name="dusun" class="form-control"
+                                            value="{{ $profile->dusun }}" readonly>
+                                    </div>
+
+                                    <!-- Add other fields here -->
+                                </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        < <!-- Add other fields here -->
+                            </form>
+                    </div>
                 </div>
+                <!-- /.card -->
             </div>
-            <!-- /.row -->
+
+
+        </div>
+        <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -94,7 +213,8 @@
 
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
+                            <input type="password"
+                                class="form-control @error('password_confirmation') is-invalid @enderror"
                                 name="password_confirmation" value="{{ old('password_confirmation') }}"
                                 placeholder="New Password Confirmation">
                             <div class="input-group-append">
