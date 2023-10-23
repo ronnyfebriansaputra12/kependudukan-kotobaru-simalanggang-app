@@ -18,7 +18,7 @@
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror"
-                        value="{{ old('nik') }}" placeholder="NIK">
+                        value="{{ $penduduk->nik }}" placeholder="NIK">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
