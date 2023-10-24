@@ -31,8 +31,9 @@
                 @if (session()->has('admin'))
                     @php
                         $admin = session('admin');
+                        // dd($admin)
                     @endphp
-                    <a href="/profile" style="text-decoration: none;">{{ $admin->nama }}</a>
+                    <a href="/profile" style="text-decoration: none;">{{ $admin->name }}</a>
                 @endif
             </div>
 
@@ -95,6 +96,23 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="toggleActive(this)">
+                            <i class="nav-icon fas fa-file"></i>
+                            <p>
+                                Surat
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-tasks" style="margin-left: 19px; margin-right: 9px;"></i>
+                                    <p>Pengajuan</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li hidden class="nav-item">
                         <a href="{{ url('/laporan') }}" class="nav-link {{ Request::is('laporan') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-book"></i>
@@ -117,7 +135,7 @@
                             <li class="nav-item">
                                 <a href="{{ url('penduduk') }}"
                                     class="nav-link {{ Request::is('penduduk') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user"></i>
+                                    <i class="nav-icon fas fa-users"></i>
                                     <p>Penduduk</p>
                                 </a>
                             </li>
@@ -126,6 +144,24 @@
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>
                                         User
+                                        {{-- <span class="right badge badge-danger">New</span> --}}
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/jenis-surat') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-file"></i>
+                                    <p>
+                                        Surat
+                                        {{-- <span class="right badge badge-danger">New</span> --}}
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/user') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-tasks"></i>
+                                    <p>
+                                        Pengajuan
                                         {{-- <span class="right badge badge-danger">New</span> --}}
                                     </p>
                                 </a>
