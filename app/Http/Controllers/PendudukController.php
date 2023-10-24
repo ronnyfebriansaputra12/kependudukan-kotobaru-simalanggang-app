@@ -119,17 +119,27 @@ class PendudukController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Penduduk $penduduk)
+    public function edit($nik)
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Penduduk $penduduk)
+    public function update(Request $request,$nik)
     {
-        //
+        $penduduk = Penduduk::findOrFail($nik);
+        $request->validate([
+            'uid' => 'required|unique:penduduks'
+        ],[
+            'uid' => 'UID penduduk sudah ada'
+        ]);
+        // dd($penduduk);
+        $penduduk->update([
+            'uid' => $request->input('uid')
+        ]);
+        return redirect()->back();
     }
 
     /**
