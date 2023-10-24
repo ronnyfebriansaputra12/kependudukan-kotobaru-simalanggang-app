@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\PencarianController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\UserController;
@@ -35,6 +36,7 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
   Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
   Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
+  Route::patch('/penduduk/{nik}', 'App\Http\Controllers\PendudukController@update')->name('penduduk');
   Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
   Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
   Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
@@ -44,4 +46,6 @@ Route::middleware(['isLogin'])->group(function () {
   Route::put('/changePassword', [UserController::class, 'changePassword']);
 
   Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
+
+  Route::get('/jenis-surat', [JenisSuratController::class, 'index']);
 });

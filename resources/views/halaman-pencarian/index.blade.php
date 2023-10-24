@@ -67,7 +67,6 @@
                                             </svg> Detail
                                         </button>
                                         <a href="{{ route('login',['nik' => $value->nik]) }}" class="btn btn-primary px-3 mx-2">Sign in</a>
-
                                     </div>
                                 </td>
                             </tr>

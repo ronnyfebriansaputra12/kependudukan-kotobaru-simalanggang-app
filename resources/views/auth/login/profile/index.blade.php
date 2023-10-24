@@ -137,22 +137,8 @@
 
                                     <!-- Add other fields here -->
                                 </div>
+                                
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                         < <!-- Add other fields here -->
                             </form>

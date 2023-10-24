@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penduduks', function (Blueprint $table) {
-            $table->id('nik');
-            $table->string('uid', 10)->nullable();
+            $table->id('nik')->unique();
+            $table->string('uid', 10)->nullable()->unique();
             $table->string('no_kk')->nullable();
             $table->string('password')->default(123456);
             $table->string('password_confirmation')->default(123456);

@@ -94,19 +94,6 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                        {{-- <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>NIK</th>
-                                <th>No KK</th>
-                                <th>Nama</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Tempat Lahir</th>
-                                <th>Alamat</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot> --}}
                     </table>
                 </div>
             </div>
@@ -140,11 +127,7 @@
             </div>
         </div>
     </div>
-
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
     <script>
         $(function() {
             $("#example1").DataTable({
@@ -221,31 +204,5 @@
         simulateRFIDDetection();
     </script>
 
-
-    {{-- <script>
-        $(document).ready(function() {
-            // Menggunakan event input untuk mendeteksi perubahan pada input field
-            $('.uid-input').on('input', function() {
-                var inputValue = $(this).val();
-                var iteration = $(this).closest('tr').find('td:first').text();
-
-                // Mengirim data ke server menggunakan AJAX
-                $.ajax({
-                    url: '/auto-save',
-                    type: 'POST',
-                    data: {
-                        iteration: iteration,
-                        uid: inputValue
-                    },
-                    success: function(response) {
-                        console.log('Data disimpan:', response);
-                    },
-                    error: function(error) {
-                        console.error('Error:', error);
-                    }
-                });
-            });
-        });
-    </script> --}}
 
 @endsection
