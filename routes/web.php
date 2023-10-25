@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PencarianController::class, 'index']);
+Route::get('/detail-penduduk/{nik}', [PencarianController::class, 'detailPenduduk']);
 Route::middleware(['AfterLogin'])->group(function () {
 
   Route::get('/login/{nik}', 'App\Http\Controllers\AuthController@loginPenduduk')->name('login');;
@@ -38,7 +39,7 @@ Route::middleware(['isLogin'])->group(function () {
   Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
   Route::patch('/uid-penduduk/{nik}', 'App\Http\Controllers\PendudukController@updateUID');
   Route::patch('/penduduk/{nik}', 'App\Http\Controllers\PendudukController@update');
-  Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
+  Route::get('/penduduk/{nik}', 'App\Http\Controllers\PendudukController@show');
   Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
   Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
   Route::post('/penduduk-excel', [PendudukController::class, 'importExcel']);

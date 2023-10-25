@@ -99,8 +99,10 @@ class PendudukController extends Controller
         }
     }
 
-    public function show(Penduduk $penduduk)
+    public function show($nik)
     {
+        $penduduk = Penduduk::findOrFail($nik);
+        return view('penduduk.show', compact('penduduk'));
     }
 
     public function edit($nik)
