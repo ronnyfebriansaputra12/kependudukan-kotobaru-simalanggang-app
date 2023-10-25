@@ -13,7 +13,7 @@ class JenisSuratController extends Controller
     public function index()
     {
         $jenisSurats = JenisSurat::all();
-        return view('jenis-surat.index',[
+        return view('jenis-surat.index', [
             'jenissurat' => $jenisSurats
         ]);
     }
@@ -31,7 +31,15 @@ class JenisSuratController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_surat' => 'required',
+        ]);
+
+        JenisSurat::create([
+            'name_surat' => $request->name_surat,
+        ]);
+
+        return redirect('/jenis-surat')->with('success', 'Jenis Surat Berhasil di Tambahkan');
     }
 
     /**

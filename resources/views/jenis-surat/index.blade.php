@@ -27,6 +27,26 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach ($jenissurat as $value)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ($value->name_surat) }}</td>
+                                    <td>
+                                        <div class="d-flex">
+                                            
+                                            <button type="button" class="btn btn-warning btn-sm me-1"
+                                                data-bs-toggle="modal" data-bs-target="#btn-edit{{ $value->id }}">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <a href="#" id="btn-hapus" class="btn btn-danger btn-sm"
+                                                data-id="{{ $value->id }}"><i class="fa-solid fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -41,17 +61,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('/addJenisSurat') }}" method="post">
+                    <form action="{{ url('/jenis-surat') }}" method="post">
                         @csrf
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control @error('nama_surat') is-invalid @enderror"
-                                name="nama_surat" value="{{ old('nama_surat') }}" placeholder="Nama Surat">
+                            <input type="text" class="form-control @error('name_surat') is-invalid @enderror"
+                                name="name_surat" value="{{ old('name_surat') }}" placeholder="Nama Surat">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-file"></span>
                                 </div>
                             </div>
-                            @error('nama_surat')
+                            @error('name_surat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -60,7 +80,7 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                                <button type="submit" class="btn btn-primary btn-block">Tambah</button>
                             </div>
                         </div>
                     </form>
