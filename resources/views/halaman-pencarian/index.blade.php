@@ -2,11 +2,11 @@
 @section('title', 'Cari Data Penduduk')
 @section('container')
 
-    <!-- /.login-logo -->
-    <div class="card card-outline card-primary w-75 mx-auto">
-        <div class="text-center mt-2">
-            <img src="{{ asset('AdminLTE') }}/dist/img/50kota.png" width="140px" height="130px" alt="">
-        </div>
+<!-- /.login-logo -->
+<div class="card card-outline card-primary w-75 mx-auto">
+  <div class="text-center mt-2">
+    <img src="{{ asset('AdminLTE') }}/dist/img/50kota.png" width="140px" height="130px" alt="">
+  </div>
 
         <div class="text-center">
             <a href="{{ url('/') }}" class="h1"><b>Cari Data Penduduk</b></a>
@@ -67,6 +67,7 @@
                                             </svg> Detail
                                         </button>
                                         <a href="{{ route('login',['nik' => $value->nik]) }}" class="btn btn-primary px-3 mx-2">Sign in</a>
+
                                     </div>
                                 </td>
                             </tr>

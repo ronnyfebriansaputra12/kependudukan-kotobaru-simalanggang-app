@@ -36,7 +36,8 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
   Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
   Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
-  Route::patch('/penduduk/{nik}', 'App\Http\Controllers\PendudukController@update')->name('penduduk');
+  Route::patch('/uid-penduduk/{nik}', 'App\Http\Controllers\PendudukController@updateUID');
+  Route::patch('/penduduk/{nik}', 'App\Http\Controllers\PendudukController@update');
   Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
   Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
   Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
