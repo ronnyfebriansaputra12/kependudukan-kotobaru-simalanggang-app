@@ -27,44 +27,39 @@
 
                                     <div class="form-group">
                                         <label for="nama">Nama Lengkap</label>
-                                        <input type="text" nama="nama" disabled required value="{{ $penduduk->nama }}"
+                                        <input type="text" nama="nama" readonly value="{{ $penduduk->nama }}"
                                             class="form-control" id="nama" placeholder="Enter Name Anda">
                                     </div>
                                     <div class="form-group">
                                         <label for="tmp_lahir">Tempat Lahir</label>
-                                        <input type="text" disabled name="tmp_lahir" required
+                                        <input type="text" readonly name="tmp_lahir" required
                                             value="{{ $penduduk->tmp_lahir }}" class="form-control" id="tmp_lahir"
                                             placeholder="Enter Tempat Lahir">
                                     </div>
                                     <div class="form-group">
                                         <label for="tgl_lahir">Tanggal Lahir</label>
-                                        <input type="date" disabled required name="tgl_lahir"
-                                            value="{{ $penduduk->tgl_lahir }}" class="form-control" id="tgl_lahir"
-                                            placeholder="Enter Tanggal lahir Anda">
+                                        <input type="date" readonly name="tgl_lahir" value="{{ $penduduk->tgl_lahir }}"
+                                            class="form-control" id="tgl_lahir" placeholder="Enter Tanggal lahir Anda">
                                     </div>
                                     <div class="form-group">
                                         <label for="jekel">Jenis Kelamin</label>
-                                        <input type="text" disabled required name="jekel"
-                                            value="{{ $penduduk->jekel }}" class="form-control" id="jekel"
-                                            placeholder="Enter Tanggal lahir Anda">
+                                        <input type="text" readonly name="jekel" value="{{ $penduduk->jekel }}"
+                                            class="form-control" id="jekel" placeholder="Enter Tanggal lahir Anda">
                                     </div>
                                     <div class="form-group">
                                         <label for="agama">Agama</label>
-                                        <input type="text" disabled required name="agama"
-                                            value="{{ $penduduk->agama }}" class="form-control" id="agama"
-                                            placeholder="Enter Tanggal lahir Anda">
+                                        <input type="text" readonly name="agama" value="{{ $penduduk->agama }}"
+                                            class="form-control" id="agama" placeholder="Enter agama">
                                     </div>
                                     <div class="form-group">
                                         <label for="alamat">Alamat</label>
-                                        <input type="text" disabled required name="alamat"
-                                            value="{{ $penduduk->alamat }}" class="form-control" id="alamat"
-                                            placeholder="Enter Alamat Anda">
+                                        <input type="text" readonly name="alamat" value="{{ $penduduk->alamat }}"
+                                            class="form-control" id="alamat" placeholder="Enter Alamat Anda">
                                     </div>
                                     <div class="form-group">
                                         <label for="pekerjaan">Pekerjaan</label>
-                                        <input type="text" disabled required name="pekerjaan"
-                                            value="{{ $penduduk->pekerjaan }}" class="form-control" id="pekerjaan"
-                                            placeholder="Enter Pekerjaan">
+                                        <input type="text" readonly name="pekerjaan" value="{{ $penduduk->pekerjaan }}"
+                                            class="form-control" id="pekerjaan" placeholder="Enter Pekerjaan">
                                     </div>
                                 </div>
 
