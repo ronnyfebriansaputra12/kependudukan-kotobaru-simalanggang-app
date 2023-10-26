@@ -48,10 +48,7 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
-
-            
             'nik_penduduk' => 'required',
             'id_jenis_surat' => 'required',
             'nama_orangtua' => 'required',

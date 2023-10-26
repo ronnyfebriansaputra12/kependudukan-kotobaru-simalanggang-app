@@ -22,4 +22,9 @@ class PencarianController extends Controller
 
         return view('halaman-pencarian.index', compact('penduduks'));
     }
+
+    public function detailPenduduk($nik) {
+        $penduduk = Penduduk::findOrFail($nik);
+        return view('halaman-pencarian.detail-penduduk', compact('penduduk'));
+    }
 }
