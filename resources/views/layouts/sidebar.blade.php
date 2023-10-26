@@ -106,7 +106,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ url('/pengajuan') }}" class="nav-link">
                                     <i class="fa fa-tasks" style="margin-left: 19px; margin-right: 9px;"></i>
                                     <p>Pengajuan</p>
                                 </a>
@@ -158,7 +158,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/user') }}" class="nav-link">
+                                <a href="{{ url('/pengajuan') }}" class="nav-link">
                                     <i class="nav-icon fas fa-tasks"></i>
                                     <p>
                                         Pengajuan

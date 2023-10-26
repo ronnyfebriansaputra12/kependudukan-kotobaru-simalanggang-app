@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('nama');
             $table->string('tmp_lahir')->nullable();
             $table->date('tgl_lahir')->nullable();
+            $table->string('agama');
             $table->string('jekel')->nullable();
+            $table->string('status_perkawinan')->nullable();
             $table->string('ibu_kandung')->nullable();
             $table->string('hub_kel')->nullable();
             $table->string('alamat')->nullable();
