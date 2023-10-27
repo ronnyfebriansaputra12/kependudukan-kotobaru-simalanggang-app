@@ -15,7 +15,6 @@
 
   <div class="card mt-3">
     <div class="card-header">
-      <h3 class="card-title">Data Penduduk Nagari Koto Baru Simalanggang</h3>
 
       <button type="button" class="btn btn-success float-right" data-bs-toggle="modal" data-bs-target="#exampleModalExcle">
         <i class="fa-solid fas fa-file"></i> Import Excel
@@ -117,6 +116,8 @@
   </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+{{-- Data Table --}}
 <script>
   $(function() {
     $("#example1").DataTable({

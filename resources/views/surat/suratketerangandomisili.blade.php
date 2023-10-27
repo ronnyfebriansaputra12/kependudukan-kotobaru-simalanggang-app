@@ -3,7 +3,7 @@
 
 <head>
     <link rel="icon" href="{{ asset('kota-pariaman.png') }}" />
-    <title>Surat Keterangan Kurang Mampu</title>
+    <title>Surat Keterangan Domisili</title>
     <style>
         /* Gaya untuk elemen-elemen surat */
         body {
@@ -75,13 +75,13 @@
 
                 <p style="text-align: center; font-weight: bold; text-decoration: underline; margin-bottom: -14px">
                     @if ($firstPengajuan->id_jenis_surat == 1)
-                        SURAT KETERANGAN KURANG MAMPU
+                        SURAT KETERANGAN DOMISILI
                     @else
                         {{ $firstPengajuan->id_jenis_surat }}
                     @endif
                 </p>
                 <p style="text-align: center;margin-bottom: 40px;">
-                    <b>Nomor : {{ $firstPengajuan->no_dokumen_perjalanan }} /SKKM/ DS-AP /VIII/2023</b>
+                    <b>Nomor : {{ $firstPengajuan->no_dokumen_perjalanan }} /SKd/ NG-SMG /VIII/2023</b>
                 </p>
 
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yang bertanda tangan dibawah ini Kepala

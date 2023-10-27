@@ -21,8 +21,7 @@
                                 <div class="mb-4">
                                     <label for="uid" class="form-label">UID</label>
                                     <input type="number" class="form-control @error('uid') is-invalid @enderror"
-                                        id="uid" value="{{ old('uid') }}" name="uid"
-                                         autofocus required>
+                                        id="uid" value="{{ old('uid') }}" name="uid" autofocus required>
                                     @error('uid')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -85,31 +84,19 @@
                             <div class="col-md-6">
                                 <div class="mb-4">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        id="password" value="{{ old('password') }}" name="password"
-                                        placeholder="Password Anda" autofocus required>
+                                    <input type="password" class="form-control" id="password" value="123456"
+                                        name="password" readonly>
                                 </div>
-                                @error('password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-4">
-                                    <label for="password_confirmation" class="form-label">Password
-                                        Confirmation</label>
-                                    <input type="password"
-                                        class="form-control @error('password_confirmation') is-invalid @enderror"
-                                        id="password_confirmation" value="{{ old('password_confirmation') }}"
-                                        name="password_confirmation" placeholder="Pastikan Password Sama" autofocus required>
+                                    <label for="password_confirmation" class="form-label">Password Confirmation</label>
+                                    <input type="password" class="form-control" id="password_confirmation" value="123456"
+                                        name="password_confirmation" readonly>
+                                    
                                 </div>
-                                @error('password_confirmation')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
                             </div>
+
                             <div class="col-md-6">
                                 <div class="mb-4">
                                     <label for="tmp_lahir" class="form-label">Tempat Lahir</label>
@@ -139,7 +126,8 @@
                             <div class="col-md-6">
                                 <div class="mb-4">
                                     <label for="jekel" class="form-label">Jenis Kelamin</label>
-                                    <select class="form-select" required name="jekel" aria-label="Default select example">
+                                    <select class="form-select" required name="jekel"
+                                        aria-label="Default select example">
                                         <option selected>Jenis Kelamin</option>
                                         <option value="Laki-Laki">Laki-Laki</option>
                                         <option value="Perempuan">Perempuan</option>
@@ -180,7 +168,8 @@
                             <div class="col-md-6">
                                 <div class="mb-4">
                                     <label for="desa_kelurahan" class="form-label">Desa/Kelurahan</label>
-                                    <input type="text" class="form-control @error('desa_kelurahan') is-invalid @enderror"
+                                    <input type="text"
+                                        class="form-control @error('desa_kelurahan') is-invalid @enderror"
                                         id="desa_kelurahan" value="{{ old('desa_kelurahan') }}" name="desa_kelurahan"
                                         placeholder="Nama Desa" autofocus required>
                                 </div>

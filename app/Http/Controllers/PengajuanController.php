@@ -8,6 +8,7 @@ use App\Models\Pengajuan;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class PengajuanController extends Controller
 {
@@ -48,26 +49,23 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nik_penduduk' => 'required',
-            'id_jenis_surat' => 'required',
-            'nama_orangtua' => 'required',
-            'jekel_orangtua' => 'required',
-            'umur_orangtua' => 'required',
-            'pekerjaan_orangtua' => 'required',
-            'keterangan' => 'required',
+        $data = $request->all();
+        Validator::make($data, [
+            'id_jenis_surat' => 'required|numeric',
+            'nama_orangtua' => 'required_if:id_jenis_surat,1|string',
+            'jekel_orangtua' => 'required_if:id_jenis_surat,1|string',
+            'umur_orangtua' => 'required_if:id_jenis_surat,1|numeric',
+            'pekerjaan_orangtua' => 'required_if:id_jenis_surat,1|string',
+            'keterangan' => 'required_if:id_jenis_surat,1|string',
+            'name_jenazah' => 'required_if:id_jenis_surat,2|string',
+            'tanggal_kematian' => 'required_if:id_jenis_surat,2|date',
+            'waktu_kematian' => 'required_if:id_jenis_surat,2|date_format:H:i',
+            'sebab_kematian' => 'required_if:id_jenis_surat,2|string',
+            'tempat_kematian' => 'required_if:id_jenis_surat,2|string',
+            'saksi_keterangan_kematian' => 'required_if:id_jenis_surat,2|string',
         ]);
 
-        Pengajuan::create([
-            'nik_penduduk' => $request->nik_penduduk,
-            'id_jenis_surat' => $request->id_jenis_surat,
-            'nama_orangtua' => $request->nama_orangtua,
-            'jekel_orangtua' => $request->jekel_orangtua,
-            'umur_orangtua' => $request->umur_orangtua,
-            'pekerjaan_orangtua' => $request->pekerjaan_orangtua,
-            'keterangan' => $request->keterangan,
-        ]);
-
+        Pengajuan::create($request->all());
         return redirect('/pengajuan')->with('success', 'Pengajuan Berhasil Di Ajukan, Silahkan Cek Status Pengajuan');
     }
 
