@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('no_kk')->nullable();
             $table->string('password')->default(123456);
             $table->string('password_confirmation')->default(123456);
-            $table->string('nama');
+            $table->string('nama')->nullable();
             $table->string('tmp_lahir')->nullable();
             $table->date('tgl_lahir')->nullable();
-            $table->string('agama');
+            $table->string('agama')->nullable();
             $table->string('jekel')->nullable();
             $table->string('status_perkawinan')->nullable();
             $table->string('ibu_kandung')->nullable();

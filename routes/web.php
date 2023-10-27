@@ -56,4 +56,18 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
   Route::get('/pengajuan/create/{nik}', [PengajuanController::class, 'create'])->name('pengajuan-create');
   Route::post('/pengajuan', [PengajuanController::class, 'store'])->name('pengajuan');
+  Route::put('/pengajuan/{id}', [PengajuanController::class, 'update']);
+
+  // routes/web.php
+
+  // Route::get('/print-surat/{type}/{id}', [PengajuanController::class, 'cetakSurat'])->name('print-surat');
+
+  // routes/web.php
+
+
+  Route::get('/cetak-surat/{id_jenis_surat}', [PengajuanController::class, 'cetakSurat']);
+
+// Route::get('/cetak-surat/{id}', [PengajuanController::class, 'cetakSurat'])->name('cetak-surat');
+ // Menggunakan regular expression untuk memastikan jenis_surat hanya angka
+
 });
