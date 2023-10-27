@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             'avatar' => null
 
         ]);
+
         \App\Models\Penduduk::factory()->create([
             // 'uid' => 'qwerty1234',
             'nik' => '112233445566',
@@ -38,7 +39,9 @@ class DatabaseSeeder extends Seeder
             'nama' => 'penduduk1',
             'tmp_lahir' => 'padang',
             'tgl_lahir' => '2002-08-03',
+            'agama' => 'islam',
             'jekel' => 'Laki-laki',
+            'status_perkawinan' => 'Belum Kawin',
             'ibu_kandung' => 'ibu1',
             'hub_kel' => 'anak',
             'alamat' => 'padang',
@@ -47,5 +50,43 @@ class DatabaseSeeder extends Seeder
             'dusun' => null,
 
         ]);
+
+        // \App\Models\Penduduk::factory()->create([
+        //     // 'uid' => 'qwerty1234',
+        //     'nik' => '112233445560',
+        //     'no_kk' => '2131231233',
+        //     'password' => bcrypt('qwerty123'),
+        //     'password_confirmation' => bcrypt('qwerty123'),
+        //     'nama' => 'penduduk2',
+        //     'tmp_lahir' => 'padang',
+        //     'tgl_lahir' => '2002-08-03',
+        //     'jekel' => 'Laki-laki',
+        //     'ibu_kandung' => 'ibu1',
+        //     'hub_kel' => 'anak',
+        //     'alamat' => 'padang',
+        //     'pekerjaan' => 'mahasiswa',
+        //     'desa_kelurahan' => 'payakumbuh',
+        //     'dusun' => null,
+
+        // ]);
+
+        // \App\Models\Penduduk::factory()->create([
+        //     // 'uid' => 'qwerty1234',
+        //     'nik' => '112233445561',
+        //     'no_kk' => '2131231233',
+        //     'password' => bcrypt('qwerty123'),
+        //     'password_confirmation' => bcrypt('qwerty123'),
+        //     'nama' => 'penduduk3',
+        //     'tmp_lahir' => 'padang',
+        //     'tgl_lahir' => '2002-08-03',
+        //     'jekel' => 'Laki-laki',
+        //     'ibu_kandung' => 'ibu1',
+        //     'hub_kel' => 'anak',
+        //     'alamat' => 'padang',
+        //     'pekerjaan' => 'mahasiswa',
+        //     'desa_kelurahan' => 'payakumbuh',
+        //     'dusun' => null,
+
+        // ]);
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\PencarianController;
 use App\Http\Controllers\PendudukController;
+use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PencarianController::class, 'index']);
+Route::get('/detail-penduduk/{nik}', [PencarianController::class, 'detailPenduduk']);
 Route::middleware(['AfterLogin'])->group(function () {
 
   Route::get('/login/{nik}', 'App\Http\Controllers\AuthController@loginPenduduk')->name('login');;
@@ -35,7 +38,9 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
   Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
   Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
-  Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
+  Route::patch('/uid-penduduk/{nik}', 'App\Http\Controllers\PendudukController@updateUID');
+  Route::patch('/penduduk/{nik}', 'App\Http\Controllers\PendudukController@update');
+  Route::get('/penduduk/{nik}', 'App\Http\Controllers\PendudukController@show');
   Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
   Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
   Route::post('/penduduk-excel', [PendudukController::class, 'importExcel']);
@@ -44,4 +49,25 @@ Route::middleware(['isLogin'])->group(function () {
   Route::put('/changePassword', [UserController::class, 'changePassword']);
 
   Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
+
+  Route::get('/jenis-surat', [JenisSuratController::class, 'index']);
+  Route::post('/jenis-surat', [JenisSuratController::class, 'store']);
+
+  Route::get('/pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
+  Route::get('/pengajuan/create/{nik}', [PengajuanController::class, 'create'])->name('pengajuan-create');
+  Route::post('/pengajuan', [PengajuanController::class, 'store'])->name('pengajuan');
+  Route::put('/pengajuan/{id}', [PengajuanController::class, 'update']);
+
+  // routes/web.php
+
+  // Route::get('/print-surat/{type}/{id}', [PengajuanController::class, 'cetakSurat'])->name('print-surat');
+
+  // routes/web.php
+
+
+  Route::get('/cetak-surat/{id_jenis_surat}', [PengajuanController::class, 'cetakSurat']);
+
+// Route::get('/cetak-surat/{id}', [PengajuanController::class, 'cetakSurat'])->name('cetak-surat');
+ // Menggunakan regular expression untuk memastikan jenis_surat hanya angka
+
 });
