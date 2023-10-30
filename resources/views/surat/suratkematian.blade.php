@@ -3,7 +3,7 @@
 
 <head>
     <link rel="icon" href="{{ asset('kota-pariaman.png') }}" />
-    <title>Surat Keterangan Domisili</title>
+    <title>Surat Keterangan Meninggal Dunia</title>
     <style>
         /* Gaya untuk elemen-elemen surat */
         body {
@@ -72,11 +72,16 @@
                     $firstPengajuan = $pengajuan->first();
                     $penduduk = $firstPengajuan->penduduk; // Akses objek Penduduk
                 @endphp
+
                 <p style="text-align: center; font-weight: bold; text-decoration: underline; margin-bottom: -14px">
-                        SURAT KETERANGAN DOMISILI
+                    @if ($firstPengajuan->id_jenis_surat == 1)
+                        SURAT KETERANGAN KURANG MAMPU
+                    @else
+                        {{ $firstPengajuan->id_jenis_surat }}
+                    @endif
                 </p>
                 <p style="text-align: center;margin-bottom: 40px;">
-                    <b>Nomor : {{ $firstPengajuan->no_dokumen_perjalanan }} /SKD/ NG-SMG /VIII/2023</b>
+                    <b>Nomor : {{ $firstPengajuan->no_dokumen_perjalanan }} /SKKM/ DS-AP /VIII/2023</b>
                 </p>
 
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yang bertanda tangan dibawah ini Kepala
@@ -101,7 +106,7 @@
                         <td>Jenis Kelamin</td>
                         <td>:</td>
                         <td>
-                            @if ($penduduk->jekel === 'Laki-Laki')
+                            @if ($penduduk->jekel === 'Laki-laki')
                                 Laki-laki
                             @elseif ($penduduk->jekel === 'Perempuan')
                                 Perempuan
@@ -128,16 +133,47 @@
                     <tr>
                         <td colspan="3">&nbsp;</td>
                     </tr>
+                    <tr>
+                        <td>Adalah anak dari Orang Tua / Wali dari</td>
+                    </tr>
 
+                    <tr>
+                        <td>Nama</td>
+                        <td>:</td>
+                        <td>{{ ucfirst($firstPengajuan->nama_orangtua) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Umur</td>
+                        <td>:</td>
+                        <td>{{ ucfirst($firstPengajuan->umur_orangtua) }} Tahun</td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kelamin</td>
+                        <td>:</td>
+                        <td>{{ ucfirst($firstPengajuan->jekel_orangtua) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pekerjaan</td>
+                        <td>:</td>
+                        <td>{{ ucfirst($firstPengajuan->pekerjaan_orangtua) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>:</td>
+                        <td>{{ ucfirst($firstPengajuan->alamat_orangtua) }}</td>
+                    </tr>
                 </table>
 
                 <br>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menurut sepengetahuan kami bahwa yang
-                    namanya diatas memang benar warga bermodimisli di Nagari Simalanggang Kecamatan Payakumbuh </p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menerangkan bahwa nama yang tersebut
+                    diatas
+                    adalah warga yang berdomisili Desa Apar menurut pendataan kami memang termasuk kurang mampu, untuk
+                    itu
+                    kami mohon kepada pihak yang berwenang untuk dapat memberikan Beasiswa dan Fasilitas lainnya.</p>
 
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Demikian surat keterangan domisili ini
-                    kami buat, unutk daat dipergunakan sebagaimana perlunya
-                </p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Demikian surat keterangan ini kami
+                    berikan
+                    kepada yang bersangkutan untuk dapat dipergunakan sebagai mana perlunya.</p>
                 <div style="text-align: right;">
                     @php
                         $englishMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

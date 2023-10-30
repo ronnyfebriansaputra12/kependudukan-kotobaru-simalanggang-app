@@ -10,7 +10,7 @@
     <a href="{{ url('/') }}" class="h1"><b>Cari Data Penduduk</b></a>
   </div>
   <div class="card-body w-75 mx-auto">
-    <h5 class="login-box-msg">Silakan Scan KTP</h5>
+    <h5 class="login-box-msg">Silakan Scan KTP Anda</h5>
     <form action="/" method="GET">
       <div class="input-group mb-3">
         <input type="text" name="search" class="form-control" value="{{ old('uid') }}" placeholder="UID" autofocus onchange="this.form.submit()">

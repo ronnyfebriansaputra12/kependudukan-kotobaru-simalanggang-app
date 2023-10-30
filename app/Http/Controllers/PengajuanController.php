@@ -17,11 +17,26 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::all();
+        // Mengambil penduduk dari session
+
+        if (session()->has('penduduk')){
+            $penduduk = session('penduduk');
+
+            // Mendapatkan NIK penduduk dari session
+            $nikPenduduk = $penduduk->nik;
+    
+            // Mengambil data pengajuan berdasarkan NIK penduduk
+            $pengajuans = Pengajuan::where('nik_penduduk', $nikPenduduk)->get();
+        }else{
+            $pengajuans = Pengajuan::all();
+        }
+       
+
         return view('pengajuan.index', [
             'pengajuan' => $pengajuans
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -49,21 +64,21 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        Validator::make($data, [
-            'id_jenis_surat' => 'required|numeric',
-            'nama_orangtua' => 'required_if:id_jenis_surat,1|string',
-            'jekel_orangtua' => 'required_if:id_jenis_surat,1|string',
-            'umur_orangtua' => 'required_if:id_jenis_surat,1|numeric',
-            'pekerjaan_orangtua' => 'required_if:id_jenis_surat,1|string',
-            'keterangan' => 'required_if:id_jenis_surat,1|string',
-            'name_jenazah' => 'required_if:id_jenis_surat,2|string',
-            'tanggal_kematian' => 'required_if:id_jenis_surat,2|date',
-            'waktu_kematian' => 'required_if:id_jenis_surat,2|date_format:H:i',
-            'sebab_kematian' => 'required_if:id_jenis_surat,2|string',
-            'tempat_kematian' => 'required_if:id_jenis_surat,2|string',
-            'saksi_keterangan_kematian' => 'required_if:id_jenis_surat,2|string',
-        ]);
+        // $data = $request->all();
+        // Validator::make($data, [
+        //     'id_jenis_surat' => 'required|numeric',
+        //     'nama_orangtua' => 'required_if:id_jenis_surat,1|string',
+        //     'jekel_orangtua' => 'required_if:id_jenis_surat,1|string',
+        //     'umur_orangtua' => 'required_if:id_jenis_surat,1|numeric',
+        //     'pekerjaan_orangtua' => 'required_if:id_jenis_surat,1|string',
+        //     'keterangan' => 'required_if:id_jenis_surat,1|string',
+        //     'name_jenazah' => 'required_if:id_jenis_surat,2|string',
+        //     'tanggal_kematian' => 'required_if:id_jenis_surat,2|date',
+        //     'waktu_kematian' => 'required_if:id_jenis_surat,2|date_format:H:i',
+        //     'sebab_kematian' => 'required_if:id_jenis_surat,2|string',
+        //     'tempat_kematian' => 'required_if:id_jenis_surat,2|string',
+        //     'saksi_keterangan_kematian' => 'required_if:id_jenis_surat,2|string',
+        // ]);
 
         Pengajuan::create($request->all());
         return redirect('/pengajuan')->with('success', 'Pengajuan Berhasil Di Ajukan, Silahkan Cek Status Pengajuan');
@@ -139,24 +154,48 @@ class PengajuanController extends Controller
     //     ]);
     // }
 
-    public function cetakSurat($jenis_surat)
-    {
-        // Logika untuk menentukan view berdasarkan jenis surat
-        switch ($jenis_surat) {
-            case 1:
-                // Jika jenis_surat adalah 1 (contoh: suratketerangantidakmampu)
-                return $this->cetakSuratKeteranganTidakMampu();
-                break;
-                // Tambahkan case untuk jenis surat lainnya jika diperlukan
-            default:
-                abort(404); // Jika jenis surat tidak ditemukan
+    // public function cetakSurat($id)
+    // {
+    //     $pengajuan = Pengajuan::findOrFail($id);
+    //     $surat = JenisSurat::where('id',$pengajuan->id_jenis_surat)->first();
+    //     // dd($surat);
+    //     if ($surat) {
+    //         $kataKunci = $surat->name_surat;
+    //         // dd($kataKunci);
+
+    //         if ($kataKunci === "Surat Keterangan Tidak Mampu") {
+    //             return $this->cetakSuratKeteranganTidakMampu($id);
+    //         } elseif ($kataKunci === "Surat Keterangan Kematian") {
+    //             return $this->cetakSuratKeteranganKematian($id);
+    //         } elseif ($kataKunci === "Surat Keterangan Domisili") {
+    //             return $this->cetakSuratDomisili($id);
+    //         }
+    //     }
+    // }
+
+    public function cetakSurat($id)
+{
+    $pengajuan = Pengajuan::findOrFail($id);
+    $surat = JenisSurat::where('id', $pengajuan->id_jenis_surat)->first();
+
+    if ($surat) {
+        $kataKunci = strtolower($surat->name_surat); // Ubah ke huruf kecil untuk perbandingan tanpa memperhatikan huruf besar atau kecil
+
+        // Periksa kata kunci dan panggil fungsi yang sesuai
+        if (strpos($kataKunci, "mampu") !== false) {
+            return $this->cetakSuratKeteranganTidakMampu($id);
+        } elseif (strpos($kataKunci, "domisili") !== false) {
+            return $this->cetakSuratDomisili($id);
         }
     }
+}
 
-    private function cetakSuratKeteranganTidakMampu()
+
+    private function cetakSuratKeteranganTidakMampu($id)
     {
         // Logika untuk mengambil data dan menyiapkan view
-        $pengajuan = Pengajuan::all();
+        $pengajuan = Pengajuan::where('id',$id)->get();
+        // dd($pengajuan);
         $data = [
             'judul' => 'Surat Keterangan Tidak Mampu',
             'pengajuan' => $pengajuan,
@@ -164,20 +203,27 @@ class PengajuanController extends Controller
         return view('surat.suratketerangantidakmampu', $data);
     }
 
+    private function cetakSuratKeteranganKematian($id)
+    {
+        // Logika untuk mengambil data dan menyiapkan view
+        $pengajuan = Pengajuan::where('id',$id)->get();
+        $data = [
+            'judul' => 'Surat Keterangan Kematian',
+            'pengajuan' => $pengajuan,
+        ];
+        return view('surat.suratkematian', $data);
+    }
 
-
-    // public function suratketerangantidakmampu($pengajuan_id)
-    // {
-    //     $pengajuans = Pengajuan::join('penduduks', 'pengajuans.nik_penduduk', '=', 'penduduks.nik')
-    //         ->join('jenis_surats', 'pengajuans.id_jenis_surat', '=', 'jenis_surats.id')
-    //         ->select('pengajuans.*', 'pengajuans.status', 'pengajuans.no_dokumen_perjalanan', 'pengajuans.status_orang_tua', 'pengajuans.name_orang_tua', 'pengajuans.nik_orang_tua', 'pengajuans.name_bayi', 'pengajuans.jenis_kelamin_bayi', 'pengajuans.tempat_dilahirkan', 'pengajuans.tanggal_lahir_bayi', 'pengajuans.waktu_lahir', 'pengajuans.jenis_kelahiran', 'pengajuans.kelahiran_ke', 'pengajuans.penolong_kelahiran', 'pengajuans.berat_bayi', 'pengajuans.panjang_bayi', 'pengajuans.status_ayah', 'pengajuans.name_ayah', 'pengajuans.nik_ayah', 'pengajuans.status_ibu', 'pengajuans.name_ibu', 'pengajuans.nik_ibu', 'pengajuans.name_jenazah', 'pengajuans.tanggal_kematian', 'pengajuans.waktu_kematian', 'pengajuans.sebab_kematian', 'pengajuans.tempat_kematian', 'pengajuans.saksi_keterangan_kematian', 'pengajuans.jenis_usaha', 'pengajuans.keterangan', 'penduduks.name', 'penduduks.email', 'penduduks.pekerjaan', 'penduduks.tanggal_lahir', 'penduduks.tempat_lahir', 'penduduks.jenis_kelamin', 'penduduks.alamat', 'penduduks.agama', 'penduduks.no_hp', 'jenis_surats.name_surat')
-    //         ->where('pengajuans.id', $pengajuan_id)
-    //         ->firstOrFail();
-    //     // dd($pengajuans);
-    //     return view('surat.suratketerangantidakmampu', ['pengajuans' => $pengajuans]);
-    // }
-
-
+    private function cetakSuratDomisili($id)
+    {
+        // Logika untuk mengambil data dan menyiapkan view
+        $pengajuan = Pengajuan::where('id',$id)->get();
+        $data = [
+            'judul' => 'Surat Keterangan Domisili',
+            'pengajuan' => $pengajuan,
+        ];
+        return view('surat.suratketerangandomisili', $data);
+    }
 
     /**
      * Remove the specified resource from storage.

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisSurat;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JenisSuratController extends Controller
 {
@@ -69,8 +70,15 @@ class JenisSuratController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(JenisSurat $jenisSurat)
+    public function destroy( $id)
     {
-        //
+        try {
+            $surat = JenisSurat::findOrFail($id);
+            $surat->delete();
+            return redirect('/jenis-surat');
+        } catch (\Exception $e) {
+            Alert::toast('Gagal mengubah data', 'error');
+            return back()->withErrors(['error' => 'Gagal menghapus data.']);
+        }
     }
 }

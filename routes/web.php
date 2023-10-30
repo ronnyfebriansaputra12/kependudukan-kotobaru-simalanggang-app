@@ -47,11 +47,13 @@ Route::middleware(['isLogin'])->group(function () {
 
   Route::get('/profilePenduduk', [UserController::class, 'profilePenduduk']);
   Route::put('/changePassword', [UserController::class, 'changePassword']);
+  Route::put('/profilePenduduk', [UserController::class, 'update']);
 
   Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
 
   Route::get('/jenis-surat', [JenisSuratController::class, 'index']);
   Route::post('/jenis-surat', [JenisSuratController::class, 'store']);
+  Route::get('/jenis-surat/delete/{id}', [JenisSuratController::class, 'destroy']);
 
   Route::get('/pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
   Route::get('/pengajuan/create/{nik}', [PengajuanController::class, 'create'])->name('pengajuan-create');

@@ -12,8 +12,6 @@
             <a href="{{ url('/') }}" class="h1"><b>Login Penduduk</b></a>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">Login</p>
-
             <form action="/loginProsesPenduduk" method="post">
                 @csrf
                 <div class="input-group mb-3">

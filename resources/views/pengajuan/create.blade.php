@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('title', 'Penduduk')
-@section('header', 'Form Pengajuan')
-@section('breadcrumb', 'Penduduk')
+@section('header', 'Formulir Tambah Pengajuan')
+@section('breadcrumb', 'Tambah Pengajuan')
 
 @section('container-fluid')
     <div class="container-fluid">
@@ -71,7 +71,7 @@
                                         <div class="form-group">
                                             <label for="nama_orangtua">Nama Orang Tua</label>
                                             <input type="text" name="nama_orangtua" class="form-control"
-                                                id="nama_orangtua" placeholder="Masukkan Nama Orang Tua" required>
+                                                id="nama_orangtua" placeholder="Masukkan Nama Orang Tua">
 
                                         </div>
                                         <div class="col-md-6">
@@ -79,7 +79,7 @@
                                                 <label for="jekel_orangtua" class="form-label">Jenis Kelamin</label>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="jekel_orangtua"
-                                                        id="jekel_laki" value="Laki-Laki" required>
+                                                        id="jekel_laki" value="Laki-Laki">
                                                     <label class="form-check-label" for="jekel_laki">
                                                         Laki-Laki
                                                     </label>
@@ -87,7 +87,7 @@
 
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="jekel_orangtua"
-                                                        id="jekel_perempuan" value="Perempuan" required> 
+                                                        id="jekel_perempuan" value="Perempuan">
                                                     <label class="form-check-label" for="jekel_perempuan">
                                                         Perempuan
                                                     </label>
@@ -98,12 +98,12 @@
                                         <div class="form-group">
                                             <label for="umur_orangtua">Umur</label>
                                             <input type="number" name="umur_orangtua" class="form-control"
-                                                id="umur_orangtua" placeholder="Masukkan Umur Orangtua" required>
+                                                id="umur_orangtua" placeholder="Masukkan Umur Orangtua">
                                         </div>
                                         <div class="form-group">
                                             <label for="pekerjaan_orangtua">Pekerjaan</label>
                                             <input type="text" name="pekerjaan_orangtua" class="form-control"
-                                                id="pekerjaan_orangtua" placeholder="Masukkan Pekerjaan Orang Tua" required>
+                                                id="pekerjaan_orangtua" placeholder="Masukkan Pekerjaan Orang Tua">
                                         </div>
                                         <div class="form-group">
                                             <label for="keterangan">Keperluan</label>
@@ -114,22 +114,22 @@
                                     {{-- Surat Keterangan kematian --}}
                                     <div class="form-group" id="form_keterangan_kematian" style="display: none">
                                         <label for="name_jenazah">Nama Jenazah *</label>
-                                        <input type="text" name="name_jenazah" class="form-control" id="name_jenazah"
-                                            placeholder="Enter Nama Jenazah" required>
+                                        <input type="text" name="nama_jenazah" class="form-control" id="name_jenazah"
+                                            placeholder="Enter Nama Jenazah">
                                     </div>
                                     <div class="form-group" id="tanggal_kematians" style="display: none">
                                         <label for="tanggal_kematian">Tanggal Kematian *</label>
                                         <input type="date" name="tanggal_kematian" class="form-control"
-                                            id="tanggal_kematian" placeholder="Enter Tanggal Lahir Bayi" required>
+                                            id="tanggal_kematian" placeholder="Enter Tanggal Lahir Bayi">
                                     </div>
                                     <div class="form-group" id="waktu_kematians" style="display: none">
                                         <label for="waktu_kematian">Waktu Kematian *</label>
                                         <input type="time" name="waktu_kematian" class="form-control"
-                                            id="waktu_kematian" placeholder="Enter Waktu Kematian" required>
+                                            id="waktu_kematian" placeholder="Enter Waktu Kematian">
                                     </div>
                                     <div class="form-group" id="sebab_kematians" style="display: none">
                                         <label for="sebab_kematian">Sebab Kematian *</label>
-                                        <select name="sebab_kematian" class="form-control" id="sebab_kematian" required>
+                                        <select name="sebab_kematian" class="form-control" id="sebab_kematian">
                                             <option value="">Pilih Sebab Kematian</option>
                                             <option value="sakis biasa / tua">Sakit Biasa / Tua</option>
                                             <option value="wabah penyakit">Wabah Penyakit</option>
@@ -142,12 +142,12 @@
                                     <div class="form-group" id="tempat_kematians" style="display: none">
                                         <label for="tempat_kematian">Tempat Kematian *</label>
                                         <input type="text" name="tempat_kematian" class="form-control"
-                                            id="tempat_kematian" placeholder="Enter Tempat Kematian" required>
+                                            id="tempat_kematian" placeholder="Enter Tempat Kematian">
                                     </div>
                                     <div class="form-group" id="saksi_keterangan_kematians" style="display: none">
                                         <label for="saksi_keterangan_kematian">Saksi Keterangan Kematian *</label>
                                         <select name="saksi_keterangan_kematian" class="form-control"
-                                            id="saksi_keterangan_kematian" required>
+                                            id="saksi_keterangan_kematian">
                                             <option value="">Pilih Saksi Keterangan Kematian</option>
                                             <option value="dokter">Dokter</option>
                                             <option value="tenaga kesehatan">Tenaga Kesehatan</option>
@@ -161,7 +161,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="#" type="button" class="btn btn-secondary">Kembali</a>
+                            <a href="/pengajuan" type="button" class="btn btn-warning">Kembali</a>
                             <button type="submit" class="btn btn-primary float-right">Ajukan
                                 Surat</button>
                         </div>
