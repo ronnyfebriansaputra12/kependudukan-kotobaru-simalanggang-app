@@ -154,24 +154,42 @@ class PengajuanController extends Controller
     //     ]);
     // }
 
-    public function cetakSurat($id)
-    {
-        $pengajuan = Pengajuan::findOrFail($id);
-        $surat = JenisSurat::where('id',$pengajuan->id_jenis_surat)->first();
-        // dd($surat);
-        if ($surat) {
-            $kataKunci = $surat->name_surat;
-            // dd($kataKunci);
+    // public function cetakSurat($id)
+    // {
+    //     $pengajuan = Pengajuan::findOrFail($id);
+    //     $surat = JenisSurat::where('id',$pengajuan->id_jenis_surat)->first();
+    //     // dd($surat);
+    //     if ($surat) {
+    //         $kataKunci = $surat->name_surat;
+    //         // dd($kataKunci);
 
-            if ($kataKunci === "Surat Keterangan Kurang Mampu") {
-                return $this->cetakSuratKeteranganTidakMampu($id);
-            } elseif ($kataKunci === "Surat Keterangan Kematian") {
-                return $this->cetakSuratKeteranganKematian($id);
-            } elseif ($kataKunci === "Surat Keterangan Domisili") {
-                return $this->cetakSuratDomisili($id);
-            }
+    //         if ($kataKunci === "Surat Keterangan Tidak Mampu") {
+    //             return $this->cetakSuratKeteranganTidakMampu($id);
+    //         } elseif ($kataKunci === "Surat Keterangan Kematian") {
+    //             return $this->cetakSuratKeteranganKematian($id);
+    //         } elseif ($kataKunci === "Surat Keterangan Domisili") {
+    //             return $this->cetakSuratDomisili($id);
+    //         }
+    //     }
+    // }
+
+    public function cetakSurat($id)
+{
+    $pengajuan = Pengajuan::findOrFail($id);
+    $surat = JenisSurat::where('id', $pengajuan->id_jenis_surat)->first();
+
+    if ($surat) {
+        $kataKunci = strtolower($surat->name_surat); // Ubah ke huruf kecil untuk perbandingan tanpa memperhatikan huruf besar atau kecil
+
+        // Periksa kata kunci dan panggil fungsi yang sesuai
+        if (strpos($kataKunci, "mampu") !== false) {
+            return $this->cetakSuratKeteranganTidakMampu($id);
+        } elseif (strpos($kataKunci, "domisili") !== false) {
+            return $this->cetakSuratDomisili($id);
         }
     }
+}
+
 
     private function cetakSuratKeteranganTidakMampu($id)
     {
