@@ -23,7 +23,13 @@ return new class extends Migration
             $table->string('umur_orangtua')->nullable();
             $table->string('alamat_orangtua')->nullable();
             $table->string('jekel_orangtua')->nullable();
-            $table->string('name_jenazah')->nullable();
+            $table->string('nama_jenazah')->nullable();
+            $table->string('jekel_jenazah')->nullable();
+            $table->string('pekerjaan_jenazah')->nullable();
+            $table->string('tmp_lahir_jenazah')->nullable();
+            $table->string('tgl_lahir_jenazah')->nullable();
+            $table->string('agama_jenazah')->nullable();
+            $table->string('alamat_jenazah')->nullable();
             $table->date('tanggal_kematian')->nullable();
             $table->datetime('waktu_kematian')->nullable();
             $table->string('sebab_kematian')->nullable();
@@ -51,8 +57,8 @@ return new class extends Migration
             $table->enum('status', ['0', '1']);
             $table->timestamps();
 
-            $table->foreign('nik_penduduk')->references('nik')->on('penduduks');
-            $table->foreign('id_jenis_surat')->references('id')->on('jenis_surats');
+            $table->foreign('nik_penduduk')->references('nik')->on('penduduks')->onDelete('CASCADE');
+            $table->foreign('id_jenis_surat')->references('id')->on('jenis_surats')->onDelete('CASCADE');
         });
     }
 

@@ -1,15 +1,14 @@
 @extends('layouts.master')
 
-@section('title', 'Penduduk')
+@section('title', 'Jenis Surat')
 @section('header', 'Jenis Jenis Surat')
-@section('breadcrumb', 'Penduduk')
+@section('breadcrumb', 'Jenis Surat')
 
 @section('container-fluid')
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Table List Data Jenis Surat</h3>
                     <a href="#">
                         <button type="button" class="btn btn-primary btn-sm float-right mr-3" data-bs-toggle="modal"
                             data-bs-target="#modalTambah">
@@ -19,35 +18,38 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>Name Surat</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($jenissurat as $value)
+                    <div id="example_wrapper">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ ($value->name_surat) }}</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            
-                                            <button type="button" class="btn btn-warning btn-sm me-1"
-                                                data-bs-toggle="modal" data-bs-target="#btn-edit{{ $value->id }}">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <a href="#" id="btn-hapus" class="btn btn-danger btn-sm"
-                                                data-id="{{ $value->id }}"><i class="fa-solid fas fa-trash"></i>
-                                            </a>
-                                        </div>
-                                    </td>
+                                    <th>NO</th>
+                                    <th>Name Surat</th>
+                                    <th>Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($jenissurat as $value)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $value->name_surat }}</td>
+                                        <td>
+                                            <div class="d-flex">
+
+                                                <button type="button" class="btn btn-warning btn-sm me-1"
+                                                    data-bs-toggle="modal" data-bs-target="#btn-edit{{ $value->id }}">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <a href="#" id="btn-hapus" class="btn btn-danger btn-sm"
+                                                    data-id="{{ $value->id }}"><i class="fa-solid fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -88,4 +90,51 @@
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+
+        // --------------DELETE USER----------------
+        $(document).on('click', '#btn-hapus', function(e) {
+            e.preventDefault();
+            var link = $(this).attr('data-id');
+            console.log(link);
+
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Data Akan di Hapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = "/jenis-surat" + "/delete/" + link;
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        })
+    </script>
 @endsection
