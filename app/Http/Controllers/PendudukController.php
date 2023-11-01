@@ -129,9 +129,9 @@ class PendudukController extends Controller
     public function update(Request $request, $nik)
     {
         $penduduk = Penduduk::findOrFail($nik);
-        $validate= $request->validate([
+        $validate = $request->validate([
             'uid' => 'required',
-            'nik' => 'required|min:16|numeric|unique:penduduks,nik,'.$penduduk->nik.','.$penduduk->getKeyName(),
+            'nik' => 'required|min:16|numeric|unique:penduduks,nik,' . $penduduk->nik . ',' . $penduduk->getKeyName(),
             'nama' => 'required',
             'no_kk' => 'required|nullable|min:16|numeric',
             'password' => 'required|min:2|confirmed|',

@@ -19,18 +19,18 @@ class PengajuanController extends Controller
     {
         // Mengambil penduduk dari session
 
-        if (session()->has('penduduk')){
+        if (session()->has('penduduk')) {
             $penduduk = session('penduduk');
 
             // Mendapatkan NIK penduduk dari session
             $nikPenduduk = $penduduk->nik;
-    
+
             // Mengambil data pengajuan berdasarkan NIK penduduk
             $pengajuans = Pengajuan::where('nik_penduduk', $nikPenduduk)->get();
-        }else{
+        } else {
             $pengajuans = Pengajuan::all();
         }
-       
+
 
         return view('pengajuan.index', [
             'pengajuan' => $pengajuans
@@ -174,27 +174,29 @@ class PengajuanController extends Controller
     // }
 
     public function cetakSurat($id)
-{
-    $pengajuan = Pengajuan::findOrFail($id);
-    $surat = JenisSurat::where('id', $pengajuan->id_jenis_surat)->first();
+    {
+        $pengajuan = Pengajuan::findOrFail($id);
+        $surat = JenisSurat::where('id', $pengajuan->id_jenis_surat)->first();
 
-    if ($surat) {
-        $kataKunci = strtolower($surat->name_surat); // Ubah ke huruf kecil untuk perbandingan tanpa memperhatikan huruf besar atau kecil
+        if ($surat) {
+            $kataKunci = strtolower($surat->name_surat); // Ubah ke huruf kecil untuk perbandingan tanpa memperhatikan huruf besar atau kecil
 
-        // Periksa kata kunci dan panggil fungsi yang sesuai
-        if (strpos($kataKunci, "mampu") !== false) {
-            return $this->cetakSuratKeteranganTidakMampu($id);
-        } elseif (strpos($kataKunci, "domisili") !== false) {
-            return $this->cetakSuratDomisili($id);
+            // Periksa kata kunci dan panggil fungsi yang sesuai
+            if (strpos($kataKunci, "mampu") !== false) {
+                return $this->cetakSuratKeteranganTidakMampu($id);
+            } elseif (strpos($kataKunci, "domisili") !== false) {
+                return $this->cetakSuratDomisili($id);
+            } elseif (strpos($kataKunci, "kematian") !== false) {
+                return $this->cetakSuratKeteranganKematian($id);
+            }
         }
     }
-}
 
 
     private function cetakSuratKeteranganTidakMampu($id)
     {
         // Logika untuk mengambil data dan menyiapkan view
-        $pengajuan = Pengajuan::where('id',$id)->get();
+        $pengajuan = Pengajuan::where('id', $id)->get();
         // dd($pengajuan);
         $data = [
             'judul' => 'Surat Keterangan Tidak Mampu',
@@ -206,7 +208,7 @@ class PengajuanController extends Controller
     private function cetakSuratKeteranganKematian($id)
     {
         // Logika untuk mengambil data dan menyiapkan view
-        $pengajuan = Pengajuan::where('id',$id)->get();
+        $pengajuan = Pengajuan::where('id', $id)->get();
         $data = [
             'judul' => 'Surat Keterangan Kematian',
             'pengajuan' => $pengajuan,
@@ -217,7 +219,7 @@ class PengajuanController extends Controller
     private function cetakSuratDomisili($id)
     {
         // Logika untuk mengambil data dan menyiapkan view
-        $pengajuan = Pengajuan::where('id',$id)->get();
+        $pengajuan = Pengajuan::where('id', $id)->get();
         $data = [
             'judul' => 'Surat Keterangan Domisili',
             'pengajuan' => $pengajuan,

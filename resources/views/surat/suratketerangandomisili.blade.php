@@ -121,7 +121,7 @@
                     <tr>
                         <td>Alamat Domisili</td>
                         <td>:</td>
-                        <td>{{ ucfirst($penduduk->alamat) }}</td>
+                        <td>{{ ($penduduk->alamat) }}</td>
                     </tr>
                     <!-- Sisanya dari kode Anda -->
 
@@ -166,3 +166,17 @@
         window.history.back();
     };
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var namaElement = document.getElementById("formattedNama");
+
+        if (namaElement) {
+            console.log("Script dijalankan!");
+            namaElement.innerText = namaElement.innerText.toLowerCase().replace(/\b\w/g, function(l){ return l.toUpperCase() });
+        } else {
+            console.log("Elemen dengan ID formattedNama tidak ditemukan.");
+        }
+    });
+</script>
+
+

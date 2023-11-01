@@ -38,8 +38,7 @@ class PenduduksImport implements ToModel
                 'pekerjaan' => $row[9],
                 'ibu_kandung' => $row[10],
                 'hub_kel' => $row[11],
-                'password' => Hash::make($row[12]),
-                'password_confirmation' => Hash::make($row[13]),
+                
             ]);
         } catch (\Exception $e) {
             // Penanganan kesalahan
