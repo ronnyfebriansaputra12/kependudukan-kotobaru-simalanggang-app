@@ -129,7 +129,7 @@
                                     <select class="form-select" required name="jekel"
                                         aria-label="Default select example">
                                         <option selected>Jenis Kelamin</option>
-                                        <option value="Laki-Laki">Laki-Laki</option>
+                                        <option value="Laki-laki">Laki-Laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
                                     @error('jekel')
