@@ -37,7 +37,7 @@
           </div>
 
           <div class="card-body">
-            <form action="/profilePenduduk" method="post">
+            <form action="{{url('profilePenduduk/update/' .$profile->nik)}}" method="post">
               @method('PUT')
               @csrf
               <div class="row">
@@ -55,10 +55,14 @@
                     <label for="jekel">Jenis Kelamin</label>
                     <input type="text" name="jekel" class="form-control" value="{{ $profile->jekel }}">
                   </div>
+                  @php
+                  // dd($profile);
+                  @endphp
                   <div class="form-group">
                     <label for="agama">Agama</label>
                     <select name="agama" class="form-control">
                       {{-- <option value="" disabled selected>--Pilih Agama--</option> --}}
+
                       <option value="Islam" @if ($profile->agama == 'Islam') selected @endif>
                         Islam</option>
                       <option value="Kristen" @if ($profile->agama == 'Kristen') selected @endif>
