@@ -45,9 +45,9 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
   Route::post('/penduduk-excel', [PendudukController::class, 'importExcel']);
 
-  Route::get('/profilePenduduk', [UserController::class, 'profilePenduduk']);
+  Route::get('/profilePenduduk/{nik}', [UserController::class, 'profilePenduduk']);
   Route::put('/changePassword', [UserController::class, 'changePassword']);
-  Route::put('/profilePenduduk', [UserController::class, 'update']);
+  Route::put('/profilePenduduk/update/{nik}', [UserController::class, 'update']);
 
   Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
 

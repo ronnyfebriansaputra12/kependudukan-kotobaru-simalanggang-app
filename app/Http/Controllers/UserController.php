@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penduduk;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -15,11 +16,13 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
 
-    public function profilePenduduk()
+    public function profilePenduduk($nik)
     {
         // session()->forget('penduduk');
-        $profile = session('penduduk');
 
+        
+        $profile = Penduduk::find($nik)->first();
+        // dd($profile);
         return view('auth.login.profile.index', compact('profile'));
     }
 
@@ -90,6 +93,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        // dd($request->all());
         $penduduk =  session('penduduk');
         $nik = $penduduk->nik;
         $validate = $request->validate([
@@ -114,7 +118,7 @@ class UserController extends Controller
             // session()->forget('penduduk');
             session('penduduk');
             Alert::success('Berhasil', 'Data berhasil diubah');
-            return redirect('/profilePenduduk');
+            return redirect('/profilePenduduk/' .$nik);
         } catch (\Throwable $e) {
             Alert::error('Gagal', 'Data gagal diubah');
             return redirect()->back();
