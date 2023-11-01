@@ -26,7 +26,7 @@
                     @php
                         $penduduk = session('penduduk');
                     @endphp
-                    <a href="/profilePenduduk" style="text-decoration: none;">{{ $penduduk->nama }}</a>
+                    <a href="{{url('profilePenduduk/' .$penduduk->nik)}}" style="text-decoration: none;">{{ $penduduk->nama }}</a>
                 @endif
                 @if (session()->has('admin'))
                     @php
