@@ -74,7 +74,7 @@
                 @endphp
 
                 <p style="text-align: center; font-weight: bold; text-decoration: underline; margin-bottom: -14px">
-                    SURAT KETERANGAN KURANG MAMPU
+                    SURAT KETERANGAN TIDAK MAMPU
                 </p>
                 <p style="text-align: center;margin-bottom: 40px;">
                     <b>Nomor : {{ $firstPengajuan->no_dokumen_perjalanan }} /SKKM/ DS-AP /VIII/2023</b>
@@ -94,9 +94,9 @@
                         <td><b>{{ ucfirst($penduduk->nama) }}</b></td>
                     </tr>
                     <tr>
-                        <td>Tempat, Tgl Lahir</td>
+                        <td>Tempat/Tgl Lahir</td>
                         <td>:</td>
-                        <td>{{ ucfirst($penduduk->tmp_lahir) }}, {{ $penduduk->tgl_lahir }}</td>
+                        <td>{{ ucfirst($penduduk->tmp_lahir) }}/{{ $penduduk->tgl_lahir }}</td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>

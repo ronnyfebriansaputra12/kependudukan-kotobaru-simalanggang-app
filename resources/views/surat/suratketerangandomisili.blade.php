@@ -67,13 +67,16 @@
         </div>
 
         <div class="content">
+            @php
+                use Carbon\Carbon;
+            @endphp
             @if ($pengajuan->count() > 0)
                 @php
                     $firstPengajuan = $pengajuan->first();
                     $penduduk = $firstPengajuan->penduduk; // Akses objek Penduduk
                 @endphp
                 <p style="text-align: center; font-weight: bold; text-decoration: underline; margin-bottom: -14px">
-                        SURAT KETERANGAN DOMISILI
+                    SURAT KETERANGAN DOMISILI
                 </p>
                 <p style="text-align: center;margin-bottom: 40px;">
                     <b>Nomor : {{ $firstPengajuan->no_dokumen_perjalanan }} /SKD/ NG-SMG /VIII/2023</b>
@@ -92,16 +95,19 @@
                         <td>:</td>
                         <td><b>{{ ucfirst($penduduk->nama) }}</b></td>
                     </tr>
+
                     <tr>
-                        <td>Tempat, Tgl Lahir</td>
+
+                        <td>Tempat/Tgl Lahir</td>
                         <td>:</td>
-                        <td>{{ ucfirst($penduduk->tmp_lahir) }}, {{ $penduduk->tgl_lahir }}</td>
+                        <td>{{ ucfirst($penduduk->tmp_lahir) }}/{{ Carbon::parse($penduduk->tgl_lahir)->isoFormat('D MMMM Y') }}
+                        </td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
                         <td>:</td>
                         <td>
-                            @if ($penduduk->jekel === 'Laki-Laki')
+                            @if ($penduduk->jekel === 'Laki-laki')
                                 Laki-laki
                             @elseif ($penduduk->jekel === 'Perempuan')
                                 Perempuan
@@ -121,7 +127,7 @@
                     <tr>
                         <td>Alamat Domisili</td>
                         <td>:</td>
-                        <td>{{ ($penduduk->alamat) }}</td>
+                        <td>{{ $penduduk->alamat }}</td>
                     </tr>
                     <!-- Sisanya dari kode Anda -->
 
@@ -172,11 +178,11 @@
 
         if (namaElement) {
             console.log("Script dijalankan!");
-            namaElement.innerText = namaElement.innerText.toLowerCase().replace(/\b\w/g, function(l){ return l.toUpperCase() });
+            namaElement.innerText = namaElement.innerText.toLowerCase().replace(/\b\w/g, function(l) {
+                return l.toUpperCase()
+            });
         } else {
             console.log("Elemen dengan ID formattedNama tidak ditemukan.");
         }
     });
 </script>
-
-
