@@ -13,9 +13,27 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PendudukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $penduduks = Penduduk::all();
+        $query = Penduduk::query();
+
+        $search = $request->input('search');
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('uid', 'LIKE', "%$search%")
+                      ->orWhere('nama', 'LIKE', "%$search%")
+                      ->orWhere('nik', 'LIKE', "%$search%")
+                      ->orWhere('no_kk', 'LIKE', "%$search%")
+                      ->orWhere('jekel', 'LIKE', "%$search%")
+                      ->orWhere('alamat', 'LIKE', "%$search%");
+                // Add more conditions for other fields if needed
+            });
+        }
+        
+
+        $penduduks = $query->orderBy('nama')->paginate(10); // Get the results after applying search conditions
+
         return view('penduduk.index', compact('penduduks'));
     }
 
