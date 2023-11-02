@@ -38,12 +38,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{-- @php
+                                     dd($pengajuan);   
+                                    @endphp --}}
                                     @foreach ($pengajuan as $value)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $value->penduduk->nik }}</td>
-                                            <td>{{ $value->penduduk->nama }}</td>
-                                            <td>{{ $value->jenissurat->name_surat }}</td>
+                                            <td>{{ $value->penduduk->nik ?? '-'}}</td>
+                                            <td>{{ $value->penduduk->nama ?? '-'}}</td>
+                                            <td>{{ $value->jenissurat->name_surat ??'-'}}</td>
                                             <td style="text-align: center">
                                                 <span
                                                     style="background-color: {{ $value->status === '0' ? '#8B0000' : '#1E7E34' }}; border-radius: 12px; padding: 6px; font-size: 15px; color: white; display: inline-block;">
