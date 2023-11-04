@@ -10,7 +10,7 @@ class Pengajuan extends Model
 {
     use HasFactory, Notifiable;
 
-    protected $guarded=[];
+    protected $guarded = [];
 
     public function penduduk()
     {
