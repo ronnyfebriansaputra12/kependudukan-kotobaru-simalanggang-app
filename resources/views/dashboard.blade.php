@@ -63,7 +63,7 @@
                     </div>
                     <div class="card-body">
                         <div id="example_wrapper">
-                            
+
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -83,7 +83,7 @@
                                             <td>{{  Carbon\Carbon::parse($value->created_at)->isoFormat('DD MMMM Y') }}
                                             </td>
                                             <td>
-                                              <div class="badge bg-success">Disetujui</div>
+                                                <div class="badge bg-success">Disetujui</div>
                                             </td>
                                         </tr>
                                     @endforeach
