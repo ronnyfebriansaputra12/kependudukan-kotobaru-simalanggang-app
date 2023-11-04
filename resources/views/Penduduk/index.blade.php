@@ -19,6 +19,7 @@
                     <input type="text" name="search" id="liveSearch" class="form-control w-25 float-left"
                         placeholder="Search..." onchange="this.form.submit()">
                 </form>
+                <a href="/penduduk" class=" ml-2 btn btn-secondary">Reset</a>
                 <button type="button" class="btn btn-success float-right" data-bs-toggle="modal"
                     data-bs-target="#exampleModalExcle">
                     <i class="fa-solid fas fa-file"></i> Import Excel
@@ -72,7 +73,7 @@
 
                                     <td>
                                         <div class="d-flex">
-                                            <a href="#" id="btn-camera" class="btn btn-success btn-sm me-1"
+                                            <a href="{{ url('capture/'. $value->nik) }}" id="btn-camera" class="btn btn-success btn-sm me-1"
                                                 data-id="{{ $value->nik }}"><i class="fa-solid fas fa-camera"></i>
                                             </a>
                                             <a href="{{ url('/penduduk/' . $value->nik) }}"

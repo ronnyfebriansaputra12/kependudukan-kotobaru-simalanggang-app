@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('captures', function (Blueprint $table) {
             $table->unsignedBigInteger('nik_penduduk');
-            $table->string('file_gambar');
+            $table->longText('file_gambar');
             $table->timestamps();
 
             $table->foreign('nik_penduduk')->references('nik')->on('penduduks');
