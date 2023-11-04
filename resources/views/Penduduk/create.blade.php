@@ -93,7 +93,7 @@
                                     <label for="password_confirmation" class="form-label">Password Confirmation</label>
                                     <input type="password" class="form-control" id="password_confirmation" value="123456"
                                         name="password_confirmation" readonly>
-                                    
+
                                 </div>
                             </div>
 

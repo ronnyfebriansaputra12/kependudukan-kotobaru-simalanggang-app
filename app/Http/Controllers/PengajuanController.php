@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\JenisSurat;
 use App\Models\Penduduk;
 use App\Models\Pengajuan;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
+
+use App\Notifications\PengajuanSuratNotification;
+use Illuminate\Support\Facades\Notification;
+
 
 class PengajuanController extends Controller
 {
@@ -65,8 +67,11 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-       
-        Pengajuan::create($request->all());
+        // Buat pengajuan
+        $pengajuan = Pengajuan::create($request->all());
+        $user = User::all();
+        Notification::send($user, new PengajuanSuratNotification($pengajuan));
+
         return redirect('/pengajuan')->with('success', 'Pengajuan Berhasil Di Ajukan, Silahkan Cek Status Pengajuan');
     }
 
