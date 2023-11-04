@@ -11,12 +11,6 @@
                 Penduduk
             </div>
             <div class="card-body">
-                {{-- @php
-                    dd($capture);
-                @endphp --}}
-
-
-
                 <input type="text" id="nik_penduduk" value="{{ request()->segment(2) }}" name="nik_penduduk"
                     placeholder="Nomor NIK Penduduk">
                 <video id="webcam" autoplay></video>
@@ -45,7 +39,7 @@
                     console.log('Error accessing webcam: ' + error);
                 });
 
-            captureButton.addEventListener('click', function() {
+            captureButton.addEventListener('click', function(e) { // Tambahkan e sebagai parameter
                 canvas.style.display = 'block';
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
@@ -64,11 +58,12 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        console.log(response);
+                        window.location = '/capture';
                     }
                 });
                 e.stopImmediatePropagation();
             });
         });
     </script>
+
 @endsection
