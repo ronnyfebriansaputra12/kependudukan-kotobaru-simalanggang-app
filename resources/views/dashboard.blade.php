@@ -10,7 +10,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-6">
+                    <div class="col-sm-12 col-md-4">
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-sm-12 col-md-4">
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-sm-12 col-md-4">
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
@@ -80,7 +80,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $value->nik_penduduk }}</td>
                                             <td>{{ $value->jenisSurat->name_surat }}</td>
-                                            <td>{{  Carbon\Carbon::parse($value->created_at)->isoFormat('DD MMMM Y') }}
+                                            <td>{{ Carbon\Carbon::parse($value->created_at)->isoFormat('DD MMMM Y') }}
                                             </td>
                                             <td>
                                                 <div class="badge bg-success">Disetujui</div>
@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="card ">
                             <div class="card-header">
                                 <div class="text-center fw-bold">Grafik Penduduk Berdasarkan Jenis Kelamin</div>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="card ">
                             <div class="card-header">
                                 <div class="text-center fw-bold">Grafik Penduduk Berdasarkan Domisili</div>
