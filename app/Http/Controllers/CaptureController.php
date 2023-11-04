@@ -11,7 +11,9 @@ class CaptureController extends Controller
 {
     function index($nik)
     {
-        return view('Penduduk.capture');
+        $capture = Penduduk::where('nik', $nik)->get();
+        // dd($capture);
+        return view('Penduduk.capture', compact('capture'));
     }
 
     function captureData()
