@@ -65,7 +65,7 @@
                     console.log('Error accessing webcam: ' + error);
                 });
 
-            captureButton.addEventListener('click', function() {
+            captureButton.addEventListener('click', function(e) { // Tambahkan e sebagai parameter
                 canvas.style.display = 'block';
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
@@ -92,4 +92,5 @@
             });
         });
     </script>
+
 @endsection
