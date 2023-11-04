@@ -26,13 +26,14 @@
                     @php
                         $penduduk = session('penduduk');
                     @endphp
-                    <p>{{ $penduduk->nama }}</p>
+                    <a href="{{url('profilePenduduk/' .$penduduk->nik)}}" style="text-decoration: none;">{{ $penduduk->nama }}</a>
                 @endif
                 @if (session()->has('admin'))
                     @php
                         $admin = session('admin');
+                        // dd($admin)
                     @endphp
-                    <p>{{ $admin->name }}</p>
+                    <a href="/profile" style="text-decoration: none;">{{ $admin->name }}</a>
                 @endif
             </div>
 
@@ -68,8 +69,30 @@
                     </a>
                 </li>
                 @if (session()->has('penduduk'))
-                    <li hidden class="nav-item {{ Request::is('penduduk') ? 'menu-is-opening menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ Request::is('penduduk') ? 'active' : '' }}">
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('pengajuan') ? 'active' : '' }}" onclick="toggleActive(this)"
+                            style="background-color: {{ Request::is('pengajuan') ? 'warning' : '' }}; color: dark;">
+                            <i class="nav-icon fas fa-file"></i>
+                            <p>
+                                Surat
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ url('pengajuan') }}"
+                                    class="nav-link {{ Request::is('pengajuan') ? 'active' : '' }}">
+                                    <i class="fa fa-tasks" style="margin-left: 19px; margin-right: 9px;"></i>
+                                    <p>Pengajuan</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @elseif (session()->has('admin'))
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('penduduk', 'user', 'jenis-surat', 'pengajuan') ? 'active' : '' }}"
+                            onclick="toggleActive(this)"
+                            style="background-color: {{ Request::is('penduduk', 'user', 'surat', 'pengajuan') ? 'warning' : '' }}; color: dark;">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Master Data
@@ -80,7 +103,7 @@
                             <li class="nav-item">
                                 <a href="{{ url('penduduk') }}"
                                     class="nav-link {{ Request::is('penduduk') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user"></i>
+                                    <i class="nav-icon fas fa-users"></i>
                                     <p>Penduduk</p>
                                 </a>
                             </li>
@@ -93,39 +116,21 @@
                                     </p>
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-                    <li hidden class="nav-item">
-                        <a href="{{ url('/laporan') }}" class="nav-link {{ Request::is('laporan') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-book"></i>
-                            <p>
-                                Laporan
-                                {{-- <span class="right badge badge-danger">New</span> --}}
-                            </p>
-                        </a>
-                    </li>
-                @elseif (session()->has('admin'))
-                    <li class="nav-item {{ Request::is('penduduk') ? 'menu-is-opening menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ Request::is('penduduk') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-chart-pie"></i>
-                            <p>
-                                Master Data
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ url('penduduk') }}"
-                                    class="nav-link {{ Request::is('penduduk') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user"></i>
-                                    <p>Penduduk</p>
+                                <a href="{{ url('jenis-surat') }}" class="nav-link {{ Request::is('jenis-surat') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-file"></i>
+                                    <p>
+                                        Surat
+                                        {{-- <span class="right badge badge-danger">New</span> --}}
+                                    </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/user') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-user"></i>
+                                <a href="{{ url('pengajuan') }}"
+                                    class="nav-link {{ Request::is('pengajuan') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-tasks"></i>
                                     <p>
-                                        User
+                                        Pengajuan
                                         {{-- <span class="right badge badge-danger">New</span> --}}
                                     </p>
                                 </a>

@@ -13,26 +13,35 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PendudukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $penduduks = Penduduk::all();
+        $query = Penduduk::query();
+
+        $search = $request->input('search');
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('uid', 'LIKE', "%$search%")
+                      ->orWhere('nama', 'LIKE', "%$search%")
+                      ->orWhere('nik', 'LIKE', "%$search%")
+                      ->orWhere('no_kk', 'LIKE', "%$search%")
+                      ->orWhere('jekel', 'LIKE', "%$search%")
+                      ->orWhere('alamat', 'LIKE', "%$search%");
+                // Add more conditions for other fields if needed
+            });
+        }
+        
+
+        $penduduks = $query->orderBy('nama')->paginate(10); // Get the results after applying search conditions
+
         return view('penduduk.index', compact('penduduks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('penduduk.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validate = $request->validate([
@@ -108,33 +117,67 @@ class PendudukController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Penduduk $penduduk)
+    public function show($nik)
     {
-        //
+        $penduduk = Penduduk::findOrFail($nik);
+        return view('penduduk.show', compact('penduduk'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Penduduk $penduduk)
+    public function edit($nik)
     {
-        //
+        $penduduk = Penduduk::findOrFail($nik);
+        return view('penduduk.edit', compact('penduduk'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Penduduk $penduduk)
+    public function updateUID(Request $request, $nik)
     {
-        //
+        $penduduk = Penduduk::findOrFail($nik);
+        $request->validate([
+            'uid' => 'required|unique:penduduks'
+        ], [
+            'uid' => 'UID penduduk sudah ada'
+        ]);
+        // dd($penduduk);
+        $penduduk->update([
+            'uid' => $request->input('uid')
+        ]);
+        return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function update(Request $request, $nik)
+    {
+        $penduduk = Penduduk::findOrFail($nik);
+        $validate = $request->validate([
+            'uid' => 'required',
+            'nik' => 'required|min:16|numeric|unique:penduduks,nik,' . $penduduk->nik . ',' . $penduduk->getKeyName(),
+            'nama' => 'required',
+            'no_kk' => 'required|nullable|min:16|numeric',
+            'password' => 'required|min:2|confirmed|',
+            'password_confirmation' => 'required|min:2|same:password',
+            'tmp_lahir' => 'required|nullable',
+            'tgl_lahir' => 'required|nullable|date|before:today',
+            'jekel' => 'required|nullable|',
+            'ibu_kandung' => 'required|nullable',
+            'hub_kel' => 'required|nullable',
+            'alamat' => 'required|nullable|max:255',
+            'pekerjaan' => 'required|nullable|max:255',
+            'desa_kelurahan' => 'required|nullable|max:255',
+            'dusun' => 'required|nullable|max:255',
+
+        ]);
+        $validate['password'] = Hash::make($request->password);
+        $validate['password_confirmation'] = Hash::make($request->password_confirmation);
+
+        try {
+            $penduduk->update($validate);
+            Alert::success('Berhasil', 'Data berhasil diubah');
+            return redirect('/penduduk');
+        } catch (\Throwable $e) {
+            Alert::error('Gagal', 'Data gagal diubah');
+            return redirect('/penduduk');
+        }
+    }
+
     public function destroy($nik)
     {
         try {
@@ -145,15 +188,6 @@ class PendudukController extends Controller
             Alert::toast('Gagal mengubah data', 'error');
             return back()->withErrors(['error' => 'Gagal menghapus data.']);
         }
-    }
-
-    public function autoSave(Request $request)
-    {
-        $data = $request->all();
-        // Simpan data ke database
-        Penduduk::create($data);
-
-        return response()->json(['message' => 'Data berhasil disimpan']);
     }
 
     public function importExcel(Request $request)

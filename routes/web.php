@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\PencarianController;
 use App\Http\Controllers\PendudukController;
+use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,22 +20,62 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PencarianController::class, 'index']);
-Route::get('/login', 'App\Http\Controllers\AuthController@loginPenduduk')->name('login');;
-Route::get('/loginAdmin', 'App\Http\Controllers\AuthController@loginAdmin');
-Route::post('/loginProsesAdmin', 'App\Http\Controllers\AuthController@loginProsesAdmin');
-Route::post('/loginProsesPenduduk', 'App\Http\Controllers\AuthController@loginProsesPenduduk');
+Route::get('/detail-penduduk/{nik}', [PencarianController::class, 'detailPenduduk']);
+Route::middleware(['AfterLogin'])->group(function () {
+
+  Route::get('/login/{nik}', 'App\Http\Controllers\AuthController@loginPenduduk')->name('login');;
+  Route::get('/loginAdmin', 'App\Http\Controllers\AuthController@loginAdmin');
+  Route::post('/loginProsesAdmin', 'App\Http\Controllers\AuthController@loginProsesAdmin');
+  Route::post('/loginProsesPenduduk', 'App\Http\Controllers\AuthController@loginProsesPenduduk');
+});
+
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 
-Route::middleware([])->group(function () {
+
+Route::middleware(['isLogin'])->group(function () {
   Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
   // Route::resource('penduduk', PendudukController::class);
   Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
   Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
   Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
-  Route::get('/penduduk/{penduduk}', 'App\Http\Controllers\PendudukController@show');
+  Route::patch('/uid-penduduk/{nik}', 'App\Http\Controllers\PendudukController@updateUID');
+  Route::patch('/penduduk/{nik}', 'App\Http\Controllers\PendudukController@update');
+  Route::get('/penduduk/{nik}', 'App\Http\Controllers\PendudukController@show');
   Route::get('/penduduk/delete/{nik}', 'App\Http\Controllers\PendudukController@destroy');
   Route::get('/penduduk/{penduduk}/edit', 'App\Http\Controllers\PendudukController@edit');
   Route::post('/penduduk-excel', [PendudukController::class, 'importExcel']);
 
+  Route::get('/capture/{nik}', 'App\Http\Controllers\CaptureController@index');
+  Route::get('/capture', 'App\Http\Controllers\CaptureController@captureData');
+  Route::post('/simpan-gambar', 'App\Http\Controllers\CaptureController@store');
+
+
+
+  Route::get('/profilePenduduk/{nik}', [UserController::class, 'profilePenduduk']);
+  Route::put('/changePassword', [UserController::class, 'changePassword']);
+  Route::put('/profilePenduduk/update/{nik}', [UserController::class, 'update']);
+
   Route::post('/auto-save', 'App\Http\Controllers\PendudukController@autoSave');
+
+  Route::get('/jenis-surat', [JenisSuratController::class, 'index']);
+  Route::post('/jenis-surat', [JenisSuratController::class, 'store']);
+  Route::get('/jenis-surat/delete/{id}', [JenisSuratController::class, 'destroy']);
+
+  Route::get('/pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
+  Route::get('/pengajuan/create/{nik}', [PengajuanController::class, 'create'])->name('pengajuan-create');
+  Route::post('/pengajuan', [PengajuanController::class, 'store'])->name('pengajuan');
+  Route::put('/pengajuan/{id}', [PengajuanController::class, 'update']);
+
+  // routes/web.php
+
+  // Route::get('/print-surat/{type}/{id}', [PengajuanController::class, 'cetakSurat'])->name('print-surat');
+
+  // routes/web.php
+
+
+  Route::get('/cetak-surat/{id_jenis_surat}', [PengajuanController::class, 'cetakSurat']);
+
+// Route::get('/cetak-surat/{id}', [PengajuanController::class, 'cetakSurat'])->name('cetak-surat');
+ // Menggunakan regular expression untuk memastikan jenis_surat hanya angka
+
 });

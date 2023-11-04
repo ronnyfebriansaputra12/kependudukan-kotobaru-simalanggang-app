@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Penduduk;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class PenduduksImport implements ToModel
@@ -37,6 +38,7 @@ class PenduduksImport implements ToModel
                 'pekerjaan' => $row[9],
                 'ibu_kandung' => $row[10],
                 'hub_kel' => $row[11],
+                
             ]);
         } catch (\Exception $e) {
             // Penanganan kesalahan

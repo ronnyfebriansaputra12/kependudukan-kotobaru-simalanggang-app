@@ -15,9 +15,11 @@ class AuthController extends Controller
         return view('auth.login.Administrator.index');
     }
 
-    function loginPenduduk()
+    function loginPenduduk(Request $request, $nik)
     {
-        return view('auth.login.Penduduk.index');
+        $penduduk = Penduduk::where('nik',$nik)->first();
+        return view('auth.login.Penduduk.index', ['penduduk' => $penduduk]);
+        
     }
 
     function loginProsesAdmin(Request $request)
@@ -78,4 +80,6 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
+
+
 }

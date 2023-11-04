@@ -9,11 +9,9 @@
         </div>
 
         <div class="text-center">
-            <a href="{{ url('/') }}" class="h1"><b>Nama</b></a>
+            <a href="{{ url('/') }}" class="h1"><b>Login Administrator</b></a>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">Login</p>
-
             <form action="/loginProsesAdmin" method="post">
                 @csrf
                 <div class="input-group mb-3">
