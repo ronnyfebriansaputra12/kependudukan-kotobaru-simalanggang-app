@@ -1,4 +1,3 @@
-<!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -7,35 +6,48 @@
     </ul>
     <!-- Right navbar links -->
     @if (session()->has('admin'))
-        <ul class="navbar-nav ml-auto">
+        <div class="navbar-nav ml-auto d-flex align-items-center">
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">
-                        {{ Auth::user()->unreadNotifications->count() }}
+                    <span class="badge badge-danger navbar-badge " style="position: relative; top: -1px;">
+                        <span
+                            style="position: absolute; top: -8px; left: -11px; background-color: red; padding: 4px 8px; border-radius: 50%;">
+                            {{ Auth::user()->unreadNotifications->count() }}
+                        </span>
+                        <i class="fas fa-bell"></i>
                     </span>
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header">
-                        {{ Auth::user()->unreadNotifications->count() }} Notifications
+                    <span class="dropdown-item dropdown-header bg-dark">
+                        {{ Auth::user()->unreadNotifications->count() }} New Notifications
                     </span>
-                    @foreach (Auth::user()->unreadNotifications as $notification)
+                    @forelse (Auth::user()->unreadNotifications as $notification)
                         <div class="dropdown-divider"></div>
-                        <a href="{{ url('mark-as-read/'.$notification->id) }}" class="dropdown-item">
-                            {{ $notification->data['nik_penduduk'] }} - {{ $notification->data['id_jenis_surat'] }}
+                        <a href="{{ url('mark-as-read/' . $notification->id) }}" class="dropdown-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ $notification->data['nik_penduduk'] }}</strong>
+                                    <div>{{ $notification->data['id_jenis_surat'] }}</div>
+                                    <div class="text-muted">
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    </div>
+                                </div>
+                            </div>
                         </a>
-                    @endforeach
+                    @empty
+                        <a href="#" class="dropdown-item text-center text-muted">
+                            No new notifications
+                        </a>
+                    @endforelse
+
+                    <div class="dropdown-divider"></div>
+                    <a href="{{ url('mark-as-all-read/') }}" class="dropdown-item dropdown-footer">
+                        Mark all as read
+                    </a>
                 </div>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                    <i class="fas fa-expand-arrows-alt"></i>
-                </a>
-            </li>
-        </ul>
+        </div>
     @endif
-
 </nav>
-<!-- /.navbar -->

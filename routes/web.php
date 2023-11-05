@@ -49,8 +49,9 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/capture/{nik}', 'App\Http\Controllers\CaptureController@index');
   Route::get('/capture', 'App\Http\Controllers\CaptureController@captureData');
   Route::post('/simpan-gambar', 'App\Http\Controllers\CaptureController@store');
-  
+
   Route::get('/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);
+  Route::get('/mark-as-all-read', [NotificationController::class, 'markAllAsRead']);
 
 
 
@@ -79,7 +80,7 @@ Route::middleware(['isLogin'])->group(function () {
 
   Route::get('/cetak-surat/{id_jenis_surat}', [PengajuanController::class, 'cetakSurat']);
 
-// Route::get('/cetak-surat/{id}', [PengajuanController::class, 'cetakSurat'])->name('cetak-surat');
- // Menggunakan regular expression untuk memastikan jenis_surat hanya angka
+  // Route::get('/cetak-surat/{id}', [PengajuanController::class, 'cetakSurat'])->name('cetak-surat');
+  // Menggunakan regular expression untuk memastikan jenis_surat hanya angka
 
 });
