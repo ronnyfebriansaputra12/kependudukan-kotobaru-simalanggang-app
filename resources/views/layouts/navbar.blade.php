@@ -19,9 +19,9 @@
                     </span>
                 </a>
 
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header bg-dark">
-                        {{ Auth::user()->unreadNotifications->count() }} New Notifications
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right mx-3">
+                    <span class="dropdown-item dropdown-header bg-warning">
+                        {{ Auth::user()->unreadNotifications->count() }} Notifikasi Baru
                     </span>
                     @forelse (Auth::user()->unreadNotifications as $notification)
                         <div class="dropdown-divider"></div>
@@ -38,13 +38,13 @@
                         </a>
                     @empty
                         <a href="#" class="dropdown-item text-center text-muted">
-                            No new notifications
+                            Tidak Ada Notifikasi Baru
                         </a>
                     @endforelse
 
                     <div class="dropdown-divider"></div>
                     <a href="{{ url('mark-as-all-read/') }}" class="dropdown-item dropdown-footer">
-                        Mark all as read
+                        Baca Semua Pesan
                     </a>
                 </div>
             </li>
