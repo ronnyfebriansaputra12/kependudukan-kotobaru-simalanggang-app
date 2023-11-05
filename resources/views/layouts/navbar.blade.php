@@ -19,8 +19,8 @@
                     </span>
                 </a>
 
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right mx-3">
-                    <span class="dropdown-item dropdown-header bg-warning">
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right mx-3 w-800">
+                    <span class="dropdown-item dropdown-header bg-warning text-center">
                         {{ Auth::user()->unreadNotifications->count() }} Notifikasi Baru
                     </span>
                     @forelse (Auth::user()->unreadNotifications as $notification)
@@ -29,13 +29,16 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <strong>{{ $notification->data['nik_penduduk'] }}</strong>
+                                    <p class="fw-bold">Melakukan Pengajuan</p>
                                     <div>{{ $notification->data['id_jenis_surat'] }}</div>
-                                    <div class="text-muted">
+                                    <div class="text-muted text-italic">
                                         {{ $notification->created_at->diffForHumans() }}
                                     </div>
                                 </div>
                             </div>
                         </a>
+                        <!-- Tambahkan fungsi JavaScript untuk memutar suara notifikasi -->
+                       
                     @empty
                         <a href="#" class="dropdown-item text-center text-muted">
                             Tidak Ada Notifikasi Baru
@@ -43,7 +46,7 @@
                     @endforelse
 
                     <div class="dropdown-divider"></div>
-                    <a href="{{ url('mark-as-all-read/') }}" class="dropdown-item dropdown-footer">
+                    <a href="{{ url('mark-as-all-read/') }}" class="dropdown-item dropdown-footer text-center">
                         Baca Semua Pesan
                     </a>
                 </div>

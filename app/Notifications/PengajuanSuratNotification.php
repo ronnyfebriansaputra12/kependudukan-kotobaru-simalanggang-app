@@ -33,7 +33,7 @@ class PengajuanSuratNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'nik_penduduk' => $this->pengajuan->penduduk->nama.' - Melakukan Pengajuan',
+            'nik_penduduk' => $this->pengajuan->penduduk->nama,
             'id_jenis_surat' => $this->pengajuan->jenisSurat->name_surat
         ];
     }
