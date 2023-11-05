@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JenisSuratController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PencarianController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\PengajuanController;
@@ -48,6 +49,9 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/capture/{nik}', 'App\Http\Controllers\CaptureController@index');
   Route::get('/capture', 'App\Http\Controllers\CaptureController@captureData');
   Route::post('/simpan-gambar', 'App\Http\Controllers\CaptureController@store');
+  
+  Route::get('/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);
+
 
 
 
