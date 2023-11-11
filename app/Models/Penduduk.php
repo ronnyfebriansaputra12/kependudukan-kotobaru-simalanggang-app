@@ -13,5 +13,10 @@ class Penduduk extends Model
     protected $primaryKey = 'nik';
     public $incrementing = false;
     protected $guarded=[];
+    
+    public function capture()
+    {
+        return $this->hasOne(Capture::class, 'nik_penduduk');
+    }
 
 }

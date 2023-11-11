@@ -6,21 +6,25 @@
 
 @section('container-fluid')
     <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Penduduk
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    @foreach ($capture as $item)
-                        <div class="col-md-3">
-                            <p>{{ $item->penduduk->nama }} - {{ $item->nik_penduduk }}</p>
-                            <img src="{{ $item->file_gambar }}" alt="Gambar" width="200px">
+        <div class="row">
+            @foreach ($captures as $item)
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="col-md-12">
+                                <p class="fw-bold">{{ ucwords(strtolower(substr($item->penduduk->nama, 0, 15)))}} - {{ $item->nik_penduduk }}</p>
+                                <img src="{{ $item->file_gambar }}" alt="Gambar" width="200px">
+                            </div>
+                            <div>
+                                
+                            </div>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
-
-            </div>
+            @endforeach
+        </div>
+        <div class="card-footer clearfix">
+            {{ $captures->links('pagination::bootstrap-5') }}
         </div>
     </div>
 @endsection

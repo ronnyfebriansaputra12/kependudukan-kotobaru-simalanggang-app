@@ -84,10 +84,12 @@
 
                                         <td>
                                             <div class="d-flex">
+                                              @if($value->uid !== NULL)
                                                 <a href="{{ url('capture/' . $value->nik) }}" id="btn-camera"
                                                     class="btn btn-success btn-sm me-1" data-id="{{ $value->nik }}"><i
                                                         class="fa-solid fas fa-camera"></i>
                                                 </a>
+                                                @endif
                                                 <a href="{{ url('/penduduk/' . $value->nik) }}"
                                                     class="btn btn-info btn-sm btn-detail me-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

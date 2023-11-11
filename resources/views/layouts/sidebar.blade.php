@@ -18,15 +18,25 @@
                 @else
                     <img class="img-circle elevation-2" src="{{ Auth::user()->avatar }}" alt="User profile picture">
                 @endif --}}
-                <img class="img-circle elevation-2" src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}"
-                    alt="User profile picture">
+                @php
+                    $penduduk = session('penduduk');
+                @endphp
+
+                @if ($penduduk && $penduduk->capture && $penduduk->capture->file_gambar !== null)
+                    <img class="img-circle elevation-2" src="{{ asset($penduduk->capture->file_gambar) }}"
+                        alt="User profile picture"
+                        style="background-size: cover; width: 50px; height: 55px; border-radius: 50%;">
+                @else
+                    <img class="img-circle elevation-2" src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}"
+                        alt="User profile picture"
+                        style="background-size: cover; width: 50px; height: 55px; border-radius: 50%;">
+                @endif
             </div>
-            <div class="info">
+            <div class="info my-auto">
                 @if (session()->has('penduduk'))
-                    @php
-                        $penduduk = session('penduduk');
-                    @endphp
-                    <a href="{{url('profilePenduduk/' .$penduduk->nik)}}" style="text-decoration: none;">{{ $penduduk->nama }}</a>
+                    <a href="{{ url('profilePenduduk/' . $penduduk->nik) }}"
+                        style="text-decoration: none;" class="fw-bold">{{ ucwords(strtolower(substr($penduduk->nama, 0, 15)))}}</a>
+                    <p>{{ $penduduk->nik }}</p>
                 @endif
                 @if (session()->has('admin'))
                     @php
@@ -36,23 +46,7 @@
                     <a href="/profile" style="text-decoration: none;">{{ $admin->name }}</a>
                 @endif
             </div>
-
-
         </div>
-
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                    aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -117,7 +111,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('jenis-surat') }}" class="nav-link {{ Request::is('jenis-surat') ? 'active' : '' }}">
+                                <a href="{{ url('jenis-surat') }}"
+                                    class="nav-link {{ Request::is('jenis-surat') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-file"></i>
                                     <p>
                                         Surat
@@ -136,6 +131,15 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/capture') }}" class="nav-link {{ Request::is('capture') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Galeri Foto
+                                {{-- <span class="right badge badge-danger">New</span> --}}
+                            </p>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/laporan') }}" class="nav-link {{ Request::is('laporan') ? 'active' : '' }}">

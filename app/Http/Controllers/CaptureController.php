@@ -19,8 +19,8 @@ class CaptureController extends Controller
 
     function captureData()
     {
-        $capture = Capture::all();
-        return view('Penduduk.captureData', compact('capture'));
+        $captures = Capture::latest()->paginate(12);
+        return view('Penduduk.captureData', compact('captures'));
     }
 
     public function store(Request $request)
