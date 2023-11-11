@@ -39,6 +39,7 @@ class CaptureController extends Controller
         $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
         $imageName = "images/{$penduduk->nama}-{$nikPenduduk}.png"; // Include resident's name in the file name
 
+
         // Use the Storage facade to store the image
         Storage::disk('public')->put($imageName, $image);
 
@@ -47,6 +48,8 @@ class CaptureController extends Controller
         $gambar->nik_penduduk = $nikPenduduk;
         $gambar->file_gambar = $imageName; // Save the image path in the database
         $gambar->save();
+
+
 
         return response()->json(['message' => 'Gambar berhasil disimpan']);
     }
