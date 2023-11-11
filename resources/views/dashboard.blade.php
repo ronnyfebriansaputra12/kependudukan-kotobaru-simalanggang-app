@@ -20,7 +20,7 @@
                             <div class="icon">
                                 <i class="fa fa-file-alt"></i>
                             </div>
-                            <a href="#" class="small-box-footer"> Lihat Pengajuan<i
+                            <a href="/pengajuan" class="small-box-footer"> Lihat Pengajuan<i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                             <div class="icon">
                                 <i class="fa fa-file-alt"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Lihat Pengajuan <i
+                            <a href="/pengajuan" class="small-box-footer">Lihat Pengajuan <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <div class="icon">
                                 <i class="fa fa-file-alt"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Lihat Pengajuan <i
+                            <a href="/pengajuan" class="small-box-footer">Lihat Pengajuan <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                             <div class="icon">
                                 <i class="fa fa-file-alt"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Ajukan Surat <i
+                            <a href="/pengajuan" class="small-box-footer">Ajukan Surat <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
                             <div class="icon">
                                 <i class="fa fa-file-alt"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Ajukan Surat <i
+                            <a href="/pengajuan" class="small-box-footer">Ajukan Surat <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -225,7 +225,7 @@
                             <div class="icon">
                                 <i class="fa fa-file-alt"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Ajukan Surat <i
+                            <a href="/pengajuan" class="small-box-footer">Ajukan Surat <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>

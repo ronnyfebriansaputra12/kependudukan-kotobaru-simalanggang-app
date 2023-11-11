@@ -19,9 +19,7 @@ class UserController extends Controller
     public function profilePenduduk($nik)
     {
         // session()->forget('penduduk');
-
-        
-        $profile = Penduduk::find($nik)->first();
+        $profile = Penduduk::where('nik',$nik)->first();
         // dd($profile);
         return view('auth.login.profile.index', compact('profile'));
     }

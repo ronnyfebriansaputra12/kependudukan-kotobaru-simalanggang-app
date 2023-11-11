@@ -13,9 +13,17 @@
                     <div class="card card-warning card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle"
-                                    src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}" alt="User profile picture">
+                                @if ($profile && $profile->capture && $profile->capture->file_gambar)
+                                    <img class="profile-user-img img-fluid" src="{{ asset($profile->capture->file_gambar) }}"
+                                        alt="Gambar"
+                                        style="background-size: cover; width: 200px; height: 200px; border-radius: 50%;">
+                                @else
+                                    <img class="img-circle elevation-2"
+                                        src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}" alt="User profile picture"
+                                        style="background-size: cover; width: 200px; height: 200px; border-radius: 50%;">
+                                @endif
                             </div>
+
 
                             <h3 class="profile-username text-center">{{ $profile->nama }}</h3>
                             <h3 class="profile-username text-center">{{ $profile->alamat }}</h3>
@@ -103,7 +111,8 @@
                                                 <option value="Cerai Hidup"
                                                     @if ($profile->status_perkawinan == 'Cerai Hidup') selected @endif>
                                                     Cerai Hidup</option>
-                                                <option value="Cerai Mati" @if ($profile->status_perkawinan == 'Cerai Mati') selected @endif>
+                                                <option value="Cerai Mati"
+                                                    @if ($profile->status_perkawinan == 'Cerai Mati') selected @endif>
                                                     Cerai Mati</option>
                                             </select>
                                         </div>
