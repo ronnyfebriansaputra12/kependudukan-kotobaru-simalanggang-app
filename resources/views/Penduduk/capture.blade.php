@@ -5,7 +5,7 @@
 @section('breadcrumb', 'Verifikasi Penduduk')
 @section('container-fluid')
     <style>
-        .vidio-container{
+        .vidio-container {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -36,12 +36,20 @@
             </div>
             <div class="card-body">
                 <div class="vidio-container">
-                    <input class="form-control mb-5" type="text" id="nik_penduduk" value="{{ request()->segment(2) }}"
+                    <input class="form-control mb-2" type="text" id="nik_penduduk" value="{{ request()->segment(2) }}"
                         name="nik_penduduk" placeholder="Nomor NIK Penduduk" hidden>
                     <video id="webcam" class="mx-auto" autoplay></video>
-                    <canvas id="canvas" style="display: none"></canvas>
+                    <canvas id="canvas" style="display: none" class="mt-3"></canvas>
                     <img id="capturedImage" style="display: none;">
-                    <button class="btn btn-success mt-5" id="captureButton">Capture Image</button>
+                    <div class="d-flex">
+                        <button class="btn btn-primary mt-2 mr-1" id="captureButton">Ambil Foto</button>
+                        <a href="{{ url('capture') }}" class="btn btn-success mt-2 mr-1">Simpan Gambar</a>
+                        <form action="{{ url('capture-delete/' . request()->segment(2)) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger mt-2">Reset</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,13 +73,17 @@
                     console.log('Error accessing webcam: ' + error);
                 });
 
-            captureButton.addEventListener('click', function(e) { // Tambahkan e sebagai parameter
+
+            captureButton.addEventListener('click', function(e) {
                 canvas.style.display = 'block';
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
+                canvas.width = 650;
+                canvas.height = 500;
                 canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
                 capturedImage.src = canvas.toDataURL('image/png');
                 capturedImage.style.display = 'none';
+
+                // Hide the video element
+                video.style.display = 'none';
 
                 $.ajax({
                     type: 'POST',
@@ -84,13 +96,14 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        window.location = '/capture';
-                        console.log(response);
+                        // window.location = '/capture';
+                        // console.log(response);
                     }
                 });
                 e.stopImmediatePropagation();
             });
         });
     </script>
+
 
 @endsection

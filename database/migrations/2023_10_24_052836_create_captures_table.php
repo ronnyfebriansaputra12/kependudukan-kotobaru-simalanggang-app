@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('captures', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('nik_penduduk');
             $table->longText('file_gambar');
             $table->timestamps();

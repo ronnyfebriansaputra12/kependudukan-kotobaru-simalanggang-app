@@ -30,7 +30,6 @@ return new class extends Migration
             $table->string('pekerjaan')->nullable();
             $table->string('desa_kelurahan')->nullable();
             $table->string('dusun')->nullable();
-            $table->string('file_gambar')->nullable();
             $table->timestamps();
         });
     }

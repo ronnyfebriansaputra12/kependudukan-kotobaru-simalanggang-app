@@ -13,7 +13,6 @@ class CaptureController extends Controller
     function index($nik)
     {
         $capture = Penduduk::where('nik', $nik)->get();
-        // dd($capture);
         return view('Penduduk.capture', compact('capture'));
     }
 
@@ -28,6 +27,13 @@ class CaptureController extends Controller
         $imageData = $request->input('file_gambar');
         $nikPenduduk = $request->input('nik_penduduk');
 
+        // Check if a capture record already exists for the given 'nik_penduduk'
+        $existingCapture = Capture::where('nik_penduduk', $nikPenduduk)->first();
+
+        if ($existingCapture) {
+            return redirect('/capture/ ' . $request->input('nik_penduduk'))->withErrors(['error' => 'Foto penduduk sudah ada']);
+        }
+
         // Get the name of the resident from the database (assuming you have a model for residents)
         $penduduk = Penduduk::where('nik', $nikPenduduk)->first();
 
@@ -39,7 +45,6 @@ class CaptureController extends Controller
         $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
         $imageName = "images/{$penduduk->nama}-{$nikPenduduk}.png"; // Include resident's name in the file name
 
-
         // Use the Storage facade to store the image
         Storage::disk('public')->put($imageName, $image);
 
@@ -49,8 +54,21 @@ class CaptureController extends Controller
         $gambar->file_gambar = $imageName; // Save the image path in the database
         $gambar->save();
 
-
-
         return response()->json(['message' => 'Gambar berhasil disimpan']);
+    }
+
+    function deleteCapture($nik)
+    {
+        $capture = Capture::where('nik_penduduk', $nik)->first(); // Use first() instead of get()
+
+        if ($capture) {
+            $imagePath = public_path('images/' . basename($capture->file_gambar));
+
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+            $capture->delete();
+            return redirect('/capture/' . $nik); // Remove the extra space after '/capture/'
+        }
     }
 }

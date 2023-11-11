@@ -48,6 +48,7 @@ Route::middleware(['isLogin'])->group(function () {
 
   Route::get('/capture/{nik}', 'App\Http\Controllers\CaptureController@index');
   Route::get('/capture', 'App\Http\Controllers\CaptureController@captureData');
+  Route::delete('/capture-delete/{nik}', 'App\Http\Controllers\CaptureController@deleteCapture');
   Route::post('/simpan-gambar', 'App\Http\Controllers\CaptureController@store');
 
   Route::get('/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);

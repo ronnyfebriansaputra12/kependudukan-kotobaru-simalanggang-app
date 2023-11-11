@@ -39,10 +39,9 @@
                     <div class="card card-warning">
                         <div class="card-header">
                             <h3 class="card-title">Profile</h3>
-
                             <button type="button" class="btn btn-primary btn-sm float-right mr-3" data-bs-toggle="modal"
                                 data-bs-target="#modalChangePassword{{ $profile->nik }}">
-                                <i class="fas fa-key"></i> Change Password
+                                <i class="fas fa-key"></i> Ubah Password
                             </button>
                         </div>
 

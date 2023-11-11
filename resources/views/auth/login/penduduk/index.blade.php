@@ -44,12 +44,7 @@
                 </div>
                 <div class="row">
                     <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">
-                                Remember Me
-                            </label>
-                        </div>
+                        <a href="" onclick="openWhatsApp()">Lupa Password</a>
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
@@ -59,10 +54,27 @@
                 </div>
             </form>
         </div>
+        @php
+            $nik = request()->segment(2);
+        @endphp
+        <input type="text" id="nik" value="{{ $nik }}" hidden>
         <!-- /.card-body -->
     </div>
     <!-- /.card -->
-    @include('sweetalert::alert')
+    <script>
+        function openWhatsApp() {
+            // Ganti nomor WhatsApp, nama, dan NIK sesuai kebutuhan
+            var waNumber = '6281374821410';
+            var nama = ''; // Ganti dengan nama Anda
+            var nik = document.getElementById('nik').value; // Get the value from the input field
+
+            // Format pesan WhatsApp
+            var message = encodeURIComponent('Permisi, saya lupa password akun \n NAMA : ' + nama + '\n NIK : ' + nik);
+
+            // Membuka link WhatsApp dengan nomor dan pesan yang sudah diformat
+            window.open('https://wa.me/' + waNumber + '?text=' + message, '_blank');
+        }
+    </script>
 
 
 @endsection
