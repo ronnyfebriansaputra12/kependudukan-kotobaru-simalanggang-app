@@ -7,23 +7,22 @@
 @section('container-fluid')
     <div class="container">
         <div class="row">
+            <div class="col-md-12 mb-3">
+
+                @if (session()->has('penduduk'))
+                    <a href="{{ route('pengajuan-create', ['nik' => session('penduduk.nik')]) }}"
+                        class="btn btn-primary float-right">
+                        <i class="fa-solid fas fa-plus"></i> Tambah Pengajuan
+                    </a>
+                @elseif (session()->has('admin'))
+                    <a href="/penduduk/create" style="display: none;" class="btn btn-primary float-right"><i
+                            class="fa-solid fas fa-plus"></i> Tambah
+                        Pengajuan</a>
+                @endif
+            </div>
             <div class="col-12">
+
                 <div class="card">
-                    <div class="card-header">
-
-                        @if (session()->has('penduduk'))
-                            <a href="{{ route('pengajuan-create', ['nik' => session('penduduk.nik')]) }}"
-                                class="btn btn-primary float-right">
-                                <i class="fa-solid fas fa-plus"></i> Tambah Pengajuan
-                            </a>
-                        @elseif (session()->has('admin'))
-                            <a href="/penduduk/create" style="display: none;" class="btn btn-primary float-right"><i
-                                    class="fa-solid fas fa-plus"></i> Tambah
-                                Pengajuan</a>
-                        @endif
-
-                    </div>
-                    <!-- /.card-header -->
                     <div class="card-body">
                         <div id="example_wrapper">
                             <table id="example1" class="table table-bordered table-striped">
@@ -44,9 +43,9 @@
                                     @foreach ($pengajuan as $value)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $value->penduduk->nik ?? '-'}}</td>
-                                            <td>{{ $value->penduduk->nama ?? '-'}}</td>
-                                            <td>{{ $value->jenissurat->name_surat ??'-'}}</td>
+                                            <td>{{ $value->penduduk->nik ?? '-' }}</td>
+                                            <td>{{ $value->penduduk->nama ?? '-' }}</td>
+                                            <td>{{ $value->jenissurat->name_surat ?? '-' }}</td>
                                             <td style="text-align: center">
                                                 <span
                                                     style="background-color: {{ $value->status === '0' ? '#8B0000' : '#1E7E34' }}; border-radius: 12px; padding: 6px; font-size: 15px; color: white; display: inline-block;">
@@ -155,7 +154,7 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["excel", "pdf", "print", "colvis"]
+
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,

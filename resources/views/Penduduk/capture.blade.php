@@ -2,6 +2,9 @@
 
 @section('title', 'Verifikasi Penduduk')
 @section('header', 'Verifikasi Penduduk')
+@section('link')
+    <a href="{{ url('penduduk') }}">Penduduk</a>
+@endsection
 @section('breadcrumb', 'Verifikasi Penduduk')
 @section('container-fluid')
     <style>
@@ -42,12 +45,12 @@
                     <canvas id="canvas" style="display: none" class="mt-3"></canvas>
                     <img id="capturedImage" style="display: none;">
                     <div class="d-flex">
-                        <button class="btn btn-primary mt-2 mr-1" id="captureButton">Ambil Foto</button>
-                        <a href="{{ url('capture') }}" class="btn btn-success mt-2 mr-1">Simpan Gambar</a>
+                        <button class="btn btn-primary mt-2 mr-1" id="captureButton" title="Ambil Foto"><li class="fas fa-camera"></li></button>
+                        <a href="{{ url('capture') }}" class="btn btn-success mt-2 mr-1" title="Simpan Gambar"><li class="fas fa-save"></li></a>
                         <form action="{{ url('capture-delete/' . request()->segment(2)) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger mt-2">Reset</button>
+                            <button class="btn btn-danger mt-2" title="Reset"><i class="fas fa-sync-alt"></i></button>
                         </form>
                     </div>
                 </div>

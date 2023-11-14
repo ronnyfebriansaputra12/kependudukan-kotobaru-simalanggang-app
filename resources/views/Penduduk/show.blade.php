@@ -2,7 +2,10 @@
 
 @section('title', 'Penduduk')
 @section('header', 'Detail Data Penduduk')
-@section('breadcrumb', 'Penduduk')
+@section('link')
+    <a href="{{ url('penduduk') }}">Penduduk</a>
+@endsection
+@section('breadcrumb', 'Detail Penduduk')
 
 @section('container-fluid')
     <section class="content">

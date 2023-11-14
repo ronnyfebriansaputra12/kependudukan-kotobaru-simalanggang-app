@@ -102,15 +102,6 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/user') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-user"></i>
-                                    <p>
-                                        User
-                                        {{-- <span class="right badge badge-danger">New</span> --}}
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ url('jenis-surat') }}"
                                     class="nav-link {{ Request::is('jenis-surat') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-file"></i>
@@ -137,15 +128,6 @@
                             <i class="nav-icon fas fa-images"></i>
                             <p>
                                 Galeri Foto
-                                {{-- <span class="right badge badge-danger">New</span> --}}
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/laporan') }}" class="nav-link {{ Request::is('laporan') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-book"></i>
-                            <p>
-                                Laporan
                                 {{-- <span class="right badge badge-danger">New</span> --}}
                             </p>
                         </a>

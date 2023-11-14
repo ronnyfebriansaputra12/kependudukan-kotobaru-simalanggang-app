@@ -6,17 +6,15 @@
 
 @section('container-fluid')
     <div class="row">
+        <div class="col-12 mb-3 mr-auto">
+
+            <button type="button" class="btn btn-primary btn-sm float-right mr-3" data-bs-toggle="modal"
+                data-bs-target="#modalTambah">
+                <i class="fas fa-plus"></i> Tambah Jenis Surat
+            </button>
+        </div>
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <a href="#">
-                        <button type="button" class="btn btn-primary btn-sm float-right mr-3" data-bs-toggle="modal"
-                            data-bs-target="#modalTambah">
-                            <i class="fas fa-plus"></i> Tambah Jenis Surat
-                        </button>
-                    </a>
-                </div>
-                <!-- /.card-header -->
                 <div class="card-body">
                     <div id="example_wrapper">
                         <table id="example1" class="table table-bordered table-striped">
@@ -45,6 +43,42 @@
                                             </div>
                                         </td>
                                     </tr>
+
+                                    <!-- Modal Edit Jenis Surat -->
+                                    <div class="modal fade" id="btn-edit{{ $value->id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Jenis Surat
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ url('/jenis-surat/' . $value->id) }}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <!-- Add this line to specify the method as PATCH for updating -->
+
+                                                        <div class="form-group">
+                                                            <label for="status">Nama Surat</label>
+                                                            <input type="text" name="name_surat" class="form-control"
+                                                                id="name_surat" value="{{ $value->name_surat }}"
+                                                                placeholder="Enter No Dokumen">
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary btn-block">Update</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </tbody>
                         </table>
@@ -98,7 +132,7 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["excel", "pdf", "print", "colvis"]
+
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
@@ -137,4 +171,15 @@
             })
         })
     </script>
+
+    {{-- <script>
+        $(document).on('click', '.btn-warning', function() {
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+
+            $('#edit_jenis_surat_id').val(id);
+            $('#edit_name_surat').val(name);
+        });
+    </script> --}}
+
 @endsection

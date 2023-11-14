@@ -30,6 +30,10 @@ class JenisSuratController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+
+    // ...
+
     public function store(Request $request)
     {
         $request->validate([
@@ -40,8 +44,11 @@ class JenisSuratController extends Controller
             'name_surat' => $request->name_surat,
         ]);
 
-        return redirect('/jenis-surat')->with('success', 'Jenis Surat Berhasil di Tambahkan');
+        Alert::success('Berhasil', 'Data berhasil ditambahkan');
+
+        return redirect('/jenis-surat');
     }
+
 
     /**
      * Display the specified resource.
@@ -62,15 +69,25 @@ class JenisSuratController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, JenisSurat $jenisSurat)
+    public function update(Request $request, $id)
     {
-        //
+        $jenissurat = JenisSurat::findOrFail($id);
+        $request->validate([
+            'name_surat' => 'required', 
+        ]);
+
+        $jenissurat->update([
+            'name_surat' => $request->input('name_surat')
+        ]);
+
+        Alert::success('Data Berhasil di Ubah');
+        return redirect('/jenis-surat');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         try {
             $surat = JenisSurat::findOrFail($id);

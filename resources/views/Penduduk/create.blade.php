@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
 @section('title', 'Tambah Penduduk')
-@section('header', 'Data Tambah Penduduk')
+@section('header', ' Form Tambah Data Penduduk')
+@section('link')
+    <a href="{{ url('penduduk') }}">Penduduk</a>
+@endsection
 @section('breadcrumb', 'Tambah Penduduk')
 
 @section('container-fluid')
@@ -9,9 +12,6 @@
     <div class="container">
 
         <div class="card">
-            <div class="card-header">
-                Penduduk
-            </div>
             <div class="card-body">
                 <form action="{{ url('penduduk') }}" method="post" class="needs-validation" novalidate>
                     @csrf

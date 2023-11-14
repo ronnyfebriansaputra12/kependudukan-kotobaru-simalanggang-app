@@ -36,10 +36,8 @@
             <!-- /.card-header -->
             <div class="card-body">
                 <div id="example_wrapper">
-                    <div class="table-responsive">
-
-
-                        <table id="example1" class="table table-bordered table-striped ">
+                    <div class="table-responsive table-bordered">
+                        <table id="example1" class="table  table-striped ">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -136,7 +134,7 @@
                     <form action="/penduduk-excel" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="file" class="form-label">File Excle</label>
+                            <label for="file" class="form-label">File Excel</label>
                             <input type="file" class="form-control @error('file') is-invalid @enderror" id="file"
                                 name="file" placeholder="File Excle" autofocus>
                         </div>

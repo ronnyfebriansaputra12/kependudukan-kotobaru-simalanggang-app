@@ -66,6 +66,7 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/jenis-surat', [JenisSuratController::class, 'index']);
   Route::post('/jenis-surat', [JenisSuratController::class, 'store']);
   Route::get('/jenis-surat/delete/{id}', [JenisSuratController::class, 'destroy']);
+  Route::put('/jenis-surat/{id}', [JenisSuratController::class,'update']);
 
   Route::get('/pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
   Route::get('/pengajuan/create/{nik}', [PengajuanController::class, 'create'])->name('pengajuan-create');
