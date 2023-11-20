@@ -194,7 +194,7 @@
                         <input type="hidden" name="id" value="{{ $profile->id }}">
                         <div class="input-group mb-3">
                             <input type="password" class="form-control @error('password_lama') is-invalid @enderror"
-                                name="password_lama" value="{{ old('password_lama') }}" placeholder="New Password Lama">
+                                name="password_lama" value="{{ old('password_lama') }}" placeholder="Password Lama">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-key"></span>

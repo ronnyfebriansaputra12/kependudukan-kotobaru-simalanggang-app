@@ -44,7 +44,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $value->penduduk->nik ?? '-' }}</td>
-                                            <td>{{ $value->penduduk->nama ?? '-' }}</td>
+                                            <td>{{ ucwords(strtolower($value->penduduk->nama ?? '-')) }}</td>
                                             <td>{{ $value->jenissurat->name_surat ?? '-' }}</td>
                                             <td style="text-align: center">
                                                 <span

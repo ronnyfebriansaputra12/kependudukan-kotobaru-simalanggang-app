@@ -79,72 +79,77 @@
                     SURAT KETERANGAN DOMISILI
                 </p>
                 <p style="text-align: center;margin-bottom: 40px;">
-                    <b>Nomor : {{ $firstPengajuan->no_dokumen_perjalanan }} /SKD/ NG-SMG /VIII/2023</b>
+                    <b>Nomor :   /SKD/ NG-SMG /VIII/2023</b>
                 </p>
+                <div style="text-indent: 30px">
+                    <p>Yang bertanda tangan dibawah ini
+                        Kepala
+                        Nagari Simalanggang Kecamatan Payakumbuh Kabupaten Lima Puluh Kota Provinsi Sumatera Barat.
+                        Menyatakan bahwa :</p><br>
+                    <table class="table" >
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Nama</td>
+                            <td>:</td>
+                            <td><b>{{ ucwords(strtolower($penduduk->nama)) }}</b></td>
+                        </tr>
 
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yang bertanda tangan dibawah ini Kepala
-                    Nagari Simalanggang Kecamatan Payakumbuh Kabupaten Lima Puluh Kota Provinsi Sumatera Barat.
-                    Menyatakan bahwa :</p><br>
+                        <tr>
 
-                <table class="table" style="margin-left: 40px">
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Nama</td>
-                        <td>:</td>
-                        <td><b>{{ ucfirst($penduduk->nama) }}</b></td>
-                    </tr>
+                            <td>Tempat/Tgl Lahir</td>
+                            <td>:</td>
+                            <td>{{ ucwords(strtolower($penduduk->tmp_lahir)) }}/{{ Carbon::parse($penduduk->tgl_lahir)->isoFormat('D MMMM Y') }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td>:</td>
+                            <td>
+                                @if ($penduduk->jekel === 'Laki-laki')
+                                    Laki-laki
+                                @elseif ($penduduk->jekel === 'Perempuan')
+                                    Perempuan
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Agama</td>
+                            <td>:</td>
+                            <td>{{ ucwords(strtolower($penduduk->agama)) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Pekerjaan</td>
+                            <td>:</td>
+                            <td>{{ ucwords(strtolower($penduduk->pekerjaan)) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Alamat Domisili</td>
+                            <td>:</td>
+                            <td>{{ ucwords(strtolower($penduduk->alamat)) }}</td>
+                        </tr>
+                        <!-- Sisanya dari kode Anda -->
 
-                    <tr>
+                        <tr>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
 
-                        <td>Tempat/Tgl Lahir</td>
-                        <td>:</td>
-                        <td>{{ ucfirst($penduduk->tmp_lahir) }}/{{ Carbon::parse($penduduk->tgl_lahir)->isoFormat('D MMMM Y') }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Jenis Kelamin</td>
-                        <td>:</td>
-                        <td>
-                            @if ($penduduk->jekel === 'Laki-laki')
-                                Laki-laki
-                            @elseif ($penduduk->jekel === 'Perempuan')
-                                Perempuan
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Agama</td>
-                        <td>:</td>
-                        <td>{{ ucfirst($penduduk->agama) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Pekerjaan</td>
-                        <td>:</td>
-                        <td>{{ ucfirst($penduduk->pekerjaan) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Alamat Domisili</td>
-                        <td>:</td>
-                        <td>{{ $penduduk->alamat }}</td>
-                    </tr>
-                    <!-- Sisanya dari kode Anda -->
-
-                    <tr>
-                        <td colspan="3">&nbsp;</td>
-                    </tr>
-
-                </table>
+                    </table>
+                </div>
 
                 <br>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menurut sepengetahuan kami bahwa yang
-                    namanya diatas memang benar warga bermodimisli di Nagari Simalanggang Kecamatan Payakumbuh </p>
+                <div style="text-align: justify; text-indent: 30px">
 
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Demikian surat keterangan domisili ini
-                    kami buat, unutk daat dipergunakan sebagaimana perlunya
-                </p>
-                <div style="text-align: right;">
+                    <p>Menurut sepengetahuan kami bahwa yang
+                        namanya diatas memang benar warga bermodimisli di Nagari Simalanggang Kecamatan Payakumbuh </p>
+
+                    <p>Demikian surat keterangan domisili
+                        ini
+                        kami buat, unutk dapat dipergunakan sebagaimana perlunya
+                    </p>
+                </div>
+                <div style="text-align: right; margin-top: 30px">
                     @php
                         $englishMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                         $indonesianMonths = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
@@ -154,10 +159,10 @@
 
                     <p>Koto Baru, {{ date('d', time()) }} {{ $indonesianMonth }} {{ date('Y', time()) }}</p>
 
-                    <p style="margin-right: 40px;">Kepala Desa Koto baru</p>
-                    <img src="{{ asset('ttd-kepsek.png') }}" alt="Kota Pariaman"
-                        style="margin-right: 35px;width: 120px; height: 100px;">
-                    <p style="font-weight: bold;margin-right: 70px;">Hendrik</p>
+                    <p style="margin-bottom: 60px">Kepala Desa Koto baru</p>
+                    {{-- <img src="{{ asset('ttd-kepsek.png') }}" alt="Kota Pariaman"
+                        style="margin-right: 35px;width: 120px; height: 100px;"> --}}
+                    <p style="font-weight: bold">Rezki Yuanda Putra</p>
                 </div>
             @endif
         </div>

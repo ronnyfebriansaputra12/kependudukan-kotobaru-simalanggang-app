@@ -42,10 +42,10 @@ class UserController extends Controller
             $validate['password_confirmation'] = Hash::make($request->password_confirmation);
             $profile->where('nik', $nik)->update($validate);
             Alert::toast('Update Data Berhasil', 'success');
-            return redirect('/profilePenduduk');
+            return redirect('/profilePenduduk/' .$nik);
         } else {
             Alert::toast('Password Lama Tidak Sesuai', 'error');
-            return redirect('/profilePenduduk');
+            return redirect()->back();
         }
     }
 

@@ -181,9 +181,9 @@
                     <p>Koto Baru, {{ date('d', time()) }} {{ $indonesianMonth }} {{ date('Y', time()) }}</p>
 
                     <p style="margin-right: 40px;">Kepala Desa Koto baru</p>
-                    <img src="{{ asset('ttd-kepsek.png') }}" alt="Kota Pariaman"
-                        style="margin-right: 35px;width: 120px; height: 100px;">
-                    <p style="font-weight: bold;margin-right: 70px;">Hendrik</p>
+                    {{-- <img src="{{ asset('ttd-kepsek.png') }}" alt="Kota Pariaman"
+                        style="margin-right: 35px;width: 120px; height: 100px;"> --}}
+                    <p style="font-weight: bold;margin-right: 70px;">Rezki Yuanda Putra</p>
                 </div>
             @endif
         </div>

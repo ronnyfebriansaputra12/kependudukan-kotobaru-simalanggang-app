@@ -9,8 +9,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Notifications\PengajuanSuratNotification;
-use Illuminate\Support\Facades\Notification;
 
+use Illuminate\Support\Facades\Notification;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PengajuanController extends Controller
 {
@@ -72,7 +73,8 @@ class PengajuanController extends Controller
         $user = User::all();
         Notification::send($user, new PengajuanSuratNotification($pengajuan));
 
-        return redirect('/pengajuan')->with('success', 'Pengajuan Berhasil Di Ajukan, Silahkan Cek Status Pengajuan');
+        Alert::success('Berhasil','Pengajuan Berhasil di Ajukan, Silahkan Cek Status Pengajuan');      
+        return redirect('/pengajuan');
     }
 
     /**
@@ -99,7 +101,7 @@ class PengajuanController extends Controller
         // Validasi data yang diterima dari formulir
         $request->validate([
             'status' => 'required|in:0,1', // Pastikan status hanya bernilai 0 atau 1
-            'no_dokumen_perjalanan' => 'required|string|max:255',
+            'no_dokumen_perjalanan' => 'nullable|string|max:255',
             // Tambahkan validasi lainnya sesuai kebutuhan
         ]);
 
@@ -107,6 +109,7 @@ class PengajuanController extends Controller
         $pengajuan = Pengajuan::findOrFail($id);
 
         // Update data pengajuan berdasarkan data yang diterima
+        
         $pengajuan->update([
             'status' => $request->status,
             'no_dokumen_perjalanan' => $request->no_dokumen_perjalanan,
