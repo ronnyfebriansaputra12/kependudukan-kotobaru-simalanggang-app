@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('jekel')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('temp_lahir')->nullable();
+            $table->string('tgl_lahir')->nullable();
+            $table->string('alamat')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('password_confirmation');

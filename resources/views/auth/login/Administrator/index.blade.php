@@ -1,15 +1,29 @@
 @extends('layouts.auth.login.main')
+{{-- @extends('layouts.pencarian.main') --}}
 @section('title', 'Login')
 @section('container')
 
+    <style>
+        @media screen and (max-width: 780px) {
+            img.img-logo {
+                margin-bottom: 25px;
+            }
+
+            a.text-login {
+                font-size: 25px;
+                color: black;
+
+            }
+        }
+    </style>
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="text-center mt-2">
-            <img src="{{ asset('AdminLTE') }}/dist/img/50kota.png" width="140px" height="130px" alt="">
+            <img src="{{ asset('AdminLTE') }}/dist/img/50kota.png" class="img-logo" width="140px" height="130px" alt="">
         </div>
 
         <div class="text-center">
-            <a href="{{ url('/') }}" class="h1"><b>Login Administrator</b></a>
+            <a href="{{ url('/') }}" class="text-login h1"><b>Login Administrator</b></a>
         </div>
         <div class="card-body">
             <form action="/loginProsesAdmin" method="post">

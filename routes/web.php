@@ -55,7 +55,8 @@ Route::middleware(['isLogin'])->group(function () {
   Route::get('/mark-as-all-read', [NotificationController::class, 'markAllAsRead']);
 
 
-
+  Route::get('/profileAdmin/{id}',[UserController::class, 'profileAdmin']);
+  Route::put('/profileAdmin/update/{id}', [UserController::class, 'updateAdmin']);
 
   Route::get('/profilePenduduk/{nik}', [UserController::class, 'profilePenduduk']);
   Route::put('/changePassword', [UserController::class, 'changePassword']);

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
@@ -19,8 +20,15 @@ class UserController extends Controller
     public function profilePenduduk($nik)
     {
         // session()->forget('penduduk');
-        $profile = Penduduk::where('nik',$nik)->first();
+        $profile = Penduduk::where('nik', $nik)->first();
         // dd($profile);
+        return view('auth.login.profile.index', compact('profile'));
+    }
+
+    public function profileAdmin($id)
+    {
+        $profile = User::where('id', $id)->first();
+
         return view('auth.login.profile.index', compact('profile'));
     }
 
@@ -42,7 +50,7 @@ class UserController extends Controller
             $validate['password_confirmation'] = Hash::make($request->password_confirmation);
             $profile->where('nik', $nik)->update($validate);
             Alert::toast('Update Data Berhasil', 'success');
-            return redirect('/profilePenduduk/' .$nik);
+            return redirect('/profilePenduduk/' . $nik);
         } else {
             Alert::toast('Password Lama Tidak Sesuai', 'error');
             return redirect()->back();
@@ -116,14 +124,57 @@ class UserController extends Controller
             // session()->forget('penduduk');
             session('penduduk');
             Alert::success('Berhasil', 'Data berhasil diubah');
-            return redirect('/profilePenduduk/' .$nik);
+            return redirect('/profilePenduduk/' . $nik);
         } catch (\Throwable $e) {
             Alert::error('Gagal', 'Data gagal diubah');
             return redirect()->back();
         }
     }
 
-    
+    public function updateAdmin(Request $request)
+    {
+
+        $admin =  session('admin');
+        $id = $admin->id;
+        $validate = $request->validate([
+            'name' => 'required',
+            'email' => 'required|nullable',
+            'jekel' => 'required|nullable',
+            'agama' => 'required|nullable',
+            'temp_lahir' => 'required|nullable|',
+            'tgl_lahir' => 'required|nullable|date|before:today',
+            'alamat' => 'required|nullable',
+            'no_hp' => 'required|numeric',
+            'role' => 'required|',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+
+        ]);
+
+        // dd($request);
+        try {
+            // Handle upload foto
+            if ($request->hasFile('avatar')) {
+                $avatarPath = $request->file('avatar')->store('avatars', 'public');
+                $validate['avatar'] = $avatarPath;
+
+                // Hapus file lama jika ada
+                if ($admin->avatar) {
+                    Storage::disk('public')->delete($admin->avatar);
+                }
+            }
+
+            // Update data admin
+            $admin->update($validate);
+
+            Alert::success('Berhasil', 'Data berhasil diubah');
+            return redirect('/profileAdmin/' . $id);
+        } catch (\Throwable $e) {
+            Alert::error('Gagal', 'Data gagal diubah');
+            return redirect()->back();
+        }
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

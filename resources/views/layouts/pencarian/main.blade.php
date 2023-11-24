@@ -20,6 +20,7 @@
         body {
             background-image: url('{{ asset('AdminLTE/dist/img/bg-simalanggang.jpg') }}');
             background-size: cover;
+            background-position: center center; 
         }
 
         .table-container {
@@ -30,6 +31,14 @@
             width: 100%;
             white-space: nowrap;
         }
+
+        /* @media screen and (max-width: 780px) {
+            body {
+                background-image: url('{{ asset('AdminLTE/dist/img/bg-simalanggang-mobile.jpg') }}');
+                background-size: cover;
+                background-attachment: fixed;
+            }
+        } */
     </style>
 </head>
 

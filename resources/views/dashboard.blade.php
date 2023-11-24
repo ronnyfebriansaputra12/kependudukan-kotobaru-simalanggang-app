@@ -126,7 +126,7 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-lg-4 col-6">
+                    <div class="col-sm-12 col-md-4">
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
@@ -141,7 +141,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-sm-12 col-md-4">
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-sm-12 col-md-4">
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">

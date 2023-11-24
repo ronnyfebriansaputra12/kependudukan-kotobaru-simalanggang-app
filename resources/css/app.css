@@ -1,0 +1,8 @@
+.text-search {
+    font-size: 10px; /* Set the default font size for larger screens */
+
+    /* Media query for screens smaller than 768px (typical mobile devices) */
+    @media only screen and (min-width: 600px) {
+        font-size: 0 rem; /* Set a smaller font size for mobile devices */
+    }
+}

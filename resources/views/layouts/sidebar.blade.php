@@ -12,12 +12,12 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                {{-- @if (Auth::user()->avatar == '')
+                @if (Auth::user()->avatar !== nullL)
+                    <img class="img-circle elevation-2" src="{{ Auth::user()->avatar }}" alt="User profile picture">
+                @else
                     <img class="img-circle elevation-2" src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}"
                         alt="User profile picture">
-                @else
-                    <img class="img-circle elevation-2" src="{{ Auth::user()->avatar }}" alt="User profile picture">
-                @endif --}}
+                @endif
                 @php
                     $penduduk = session('penduduk');
                 @endphp
@@ -34,16 +34,19 @@
             </div>
             <div class="info my-auto">
                 @if (session()->has('penduduk'))
-                    <a href="{{ url('profilePenduduk/' . $penduduk->nik) }}"
-                        style="text-decoration: none;" class="fw-bold">{{ ucwords(strtolower(substr($penduduk->nama, 0, 15)))}}</a>
+                    <a href="{{ url('profilePenduduk/' . $penduduk->nik) }}" style="text-decoration: none;"
+                        class="fw-bold">{{ ucwords(strtolower(substr($penduduk->nama, 0, 15))) }}</a>
                     <p>{{ $penduduk->nik }}</p>
                 @endif
+
+
                 @if (session()->has('admin'))
                     @php
                         $admin = session('admin');
                         // dd($admin)
                     @endphp
-                    <a href="/profile" style="text-decoration: none;">{{ $admin->name }}</a>
+                    <a href="{{ url('profileAdmin/' . $admin->id) }}"
+                        style="text-decoration: none;">{{ $admin->name }}</a>
                 @endif
             </div>
         </div>

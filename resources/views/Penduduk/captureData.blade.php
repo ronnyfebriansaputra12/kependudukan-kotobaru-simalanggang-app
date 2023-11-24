@@ -11,7 +11,7 @@
 <div class="container">
   <div class="row">
     @foreach ($captures as $item)
-    <div class="col-3">
+    <div class="col-sm-6 col-lg-3">
       <div class="card">
         <div class="card-body text-center">
           <div class="col-md-12">

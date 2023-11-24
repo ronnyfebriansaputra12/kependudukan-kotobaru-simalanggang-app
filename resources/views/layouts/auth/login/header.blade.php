@@ -20,6 +20,7 @@
         body {
             background-image: url('{{ asset('AdminLTE/dist/img/bg-simalanggang.jpg') }}');
             background-size: cover;
+            background-position: center center;
             /* Untuk menyesuaikan ukuran gambar dengan layar */
         }
     </style>
