@@ -19,11 +19,11 @@
         @if ($penduduk && $penduduk->capture && $penduduk->capture->file_gambar !== null)
         <img class="img-circle elevation-2" src="{{ asset($penduduk->capture->file_gambar) }}" alt="User profile picture" style="background-size: cover; width: 50px; height: 55px; border-radius: 50%;">
         @elseif ($admin && Auth::check())
-          @if (Auth::user()->avatar)
-          <img class="img-circle elevation-2" src="{{ asset(Auth::user()->avatar) }}" alt="User profile picture">
-          @else
-          <img class="img-circle elevation-2" src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}" alt="Default profile picture">
-          @endif
+        @if (Auth::user()->avatar)
+        <img class="img-circle elevation-2" src="{{ asset(Auth::user()->avatar) }}" alt="User profile picture">
+        @else
+        <img class="img-circle elevation-2" src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}" alt="Default profile picture">
+        @endif
         @else
         <img class="img-circle elevation-2" src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}" alt="User profile picture" style="background-size: cover; width: 50px; height: 55px; border-radius: 50%;">
         @endif
@@ -86,6 +86,12 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ url('user') }}" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-users"></i>
+                <p>User</p>
+              </a>
+            </li>
             <li class="nav-item">
               <a href="{{ url('penduduk') }}" class="nav-link {{ Request::is('penduduk') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
