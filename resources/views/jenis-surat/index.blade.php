@@ -6,9 +6,8 @@
 
 @section('container-fluid')
     <div class="row">
-        <div class="col-12 mb-3 mr-auto">
-
-            <button type="button" class="btn btn-primary btn-sm float-right mr-3" data-bs-toggle="modal"
+        <div class="col-12 mb-3 ">
+            <button type="button" class="btn btn-outline-success " data-bs-toggle="modal"
                 data-bs-target="#modalTambah">
                 <i class="fas fa-plus"></i> Tambah Jenis Surat
             </button>

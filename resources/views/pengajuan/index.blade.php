@@ -11,11 +11,11 @@
 
                 @if (session()->has('penduduk'))
                     <a href="{{ route('pengajuan-create', ['nik' => session('penduduk.nik')]) }}"
-                        class="btn btn-primary float-right">
+                        class="btn btn-outline-success">
                         <i class="fa-solid fas fa-plus"></i> Tambah Pengajuan
                     </a>
                 @elseif (session()->has('admin'))
-                    <a href="/penduduk/create" style="display: none;" class="btn btn-primary float-right"><i
+                    <a href="/penduduk/create" style="display: none;" class="btn btn-outline-success float-right"><i
                             class="fa-solid fas fa-plus"></i> Tambah
                         Pengajuan</a>
                 @endif

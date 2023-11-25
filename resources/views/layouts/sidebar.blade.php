@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar elevation-4 sidebar-light-warning">
+<aside class="main-sidebar elevation-4 sidebar-light-success">
     <!-- Brand Logo -->
     <a href="/dashboard" class="brand-link" style="text-decoration: none">
         <img src="{{ asset('AdminLTE') }}/dist/img/50kota.png" width="70px" alt="AdminLTE Logo"
@@ -12,12 +12,15 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                @if (Auth::user()->avatar !== nullL)
-                    <img class="img-circle elevation-2" src="{{ Auth::user()->avatar }}" alt="User profile picture">
-                @else
-                    <img class="img-circle elevation-2" src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}"
-                        alt="User profile picture">
+                @if (session()->has('admin') && Auth::check())
+                    @if (Auth::user()->avatar)
+                        <img class="img-circle elevation-2" src="{{ Auth::user()->avatar }}" alt="User profile picture">
+                    @else
+                        <img class="img-circle elevation-2" src="{{ asset('adminlte/dist/img/user4-128x128.jpg') }}"
+                            alt="Default profile picture">
+                    @endif
                 @endif
+
                 @php
                     $penduduk = session('penduduk');
                 @endphp

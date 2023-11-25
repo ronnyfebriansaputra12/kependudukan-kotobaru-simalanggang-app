@@ -17,13 +17,13 @@
         }
     </style>
     <!-- /.login-logo -->
-    <div class="card card-outline card-primary">
-        <div class="text-center mt-2">
+    <div class="card card-outline card-success">
+        <div class="text-center mt-2 mb-3">
             <img src="{{ asset('AdminLTE') }}/dist/img/50kota.png" class="img-logo" width="140px" height="130px" alt="">
         </div>
 
         <div class="text-center">
-            <a href="{{ url('/') }}" class="text-login h1"><b>Login Administrator</b></a>
+            <a href="{{ url('/') }}" class="text-login h3"><b>Login Administrator</b></a>
         </div>
         <div class="card-body">
             <form action="/loginProsesAdmin" method="post">
@@ -58,16 +58,10 @@
                 </div>
                 <div class="row">
                     <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">
-                                Remember Me
-                            </label>
-                        </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <button type="submit" class="btn btn-success btn-block"><i class="fas fa-sign-in-alt"></i> Login</button>
                     </div>
                     <!-- /.col -->
                 </div>

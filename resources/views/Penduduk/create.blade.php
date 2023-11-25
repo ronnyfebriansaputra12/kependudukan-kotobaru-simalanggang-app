@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('title', 'Tambah Penduduk')
 @section('header', ' Form Tambah Data Penduduk')
 @section('link')
@@ -8,12 +7,27 @@
 @section('breadcrumb', 'Tambah Penduduk')
 
 @section('container-fluid')
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="spinner-border text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="mt-2">Menambahkan Data Penduduk...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container">
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ url('penduduk') }}" method="post" class="needs-validation" novalidate>
+                <form action="{{ url('penduduk') }}" method="post" class="needs-validation" novalidate id="pendudukForm">
                     @csrf
                     <div class="container">
                         <div class="row">
@@ -207,14 +221,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary mr-2" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                    <div class="d-flex justify-content-end">
+                        <button type="reset" class="btn btn-secondary mr-2">Close</button>
+                        <button type="submit" class="btn btn-primary" onclick="showLoadingModal()">Save</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         (function() {
@@ -234,6 +251,42 @@
                 });
             }, false);
         })();
+    </script>
+    <script>
+        function showLoadingModal() {
+            // Show the loading modal
+            $('#loadingModal').modal('show');
+
+            // Prevent the automatic form submission
+            event.preventDefault();
+
+            // Submit the form after a short delay to allow the modal to appear
+            setTimeout(function() {
+                $('#pendudukForm').submit();
+            }, 500);
+        }
+    </script>
+
+
+    <script>
+        (function() {
+            preventDefault();
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+
+        })
+        ();
     </script>
 
 @endsection

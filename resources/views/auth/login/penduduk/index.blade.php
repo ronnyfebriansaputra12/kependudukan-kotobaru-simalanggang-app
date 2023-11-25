@@ -1,16 +1,15 @@
 @extends('layouts.auth.login.main')
-
 @section('title', 'Login')
 @section('container')
 
     <!-- /.login-logo -->
-    <div class="card card-outline card-primary">
-        <div class="text-center mt-2">
+    <div class="card card-outline card-success">
+        <div class="text-center mt-2 mb-3">
             <img src="{{ asset('AdminLTE') }}/dist/img/50kota.png" width="140px" height="130px" alt="">
         </div>
 
         <div class="text-center">
-            <a href="{{ url('/') }}" class="h1"><b>Login Penduduk</b></a>
+            <a href="{{ url('/') }}" class="h3"><b>Login Penduduk</b></a>
         </div>
         <div class="card-body">
             <form action="/loginProsesPenduduk" method="post">
@@ -49,7 +48,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <button type="submit" class="btn btn-success btn-block"><i class="fas fa-sign-in-alt"></i> Login</button>
                     </div>
                     <!-- /.col -->
                 </div>

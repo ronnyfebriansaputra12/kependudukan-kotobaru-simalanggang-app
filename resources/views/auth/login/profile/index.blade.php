@@ -176,8 +176,8 @@
                                             <input type="text" name="alamat" class="form-control"
                                                 value="{{ $profile->alamat }}">
                                         </div>
-                                        <div class="col-2 mx-auto">
-                                            <button class="btn btn-success rounded-0" type="submit">Simpan</button>
+                                        <div class="col-4 mx-auto">
+                                            <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Simpan</button>
                                         </div>
                                     </div>
                                 </form>
@@ -254,7 +254,7 @@
                                     <div class="row">
                                         <!-- /.col -->
                                         <div class="col-12">
-                                            <button type="submit" class="btn btn-primary btn-block">Save</button>
+                                            <button type="submit" class="btn btn-success btn-block">Save</button>
                                         </div>
                                         <!-- /.col -->
                                     </div>
