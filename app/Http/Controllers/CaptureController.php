@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Capture;
 use App\Models\Penduduk;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -45,9 +46,16 @@ class CaptureController extends Controller
         $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
         $imageName = "images/{$penduduk->nama}-{$nikPenduduk}.png"; // Include resident's name in the file name
 
-        // Use the Storage facade to store the image
-        Storage::disk('public')->put($imageName, $image);
-
+        $imagePath = $request->file('file_gambar')->getRealPath();
+        $result = Cloudinary::upload($image, [
+            'folder' => 'file_gambar',
+            'transformation' => [
+                'width' => 320,
+                'height' => 320,
+                'crop' => 'limit',
+            ],
+        ]);
+        $imageUrl = $result->getSecurePath();
         // You can also save the image path in the database if needed
         $gambar = new Capture();
         $gambar->nik_penduduk = $nikPenduduk;
