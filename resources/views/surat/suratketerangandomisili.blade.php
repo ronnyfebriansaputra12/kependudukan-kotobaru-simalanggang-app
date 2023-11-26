@@ -78,8 +78,8 @@
                 <p style="text-align: center; font-weight: bold; text-decoration: underline; margin-bottom: -14px">
                     SURAT KETERANGAN DOMISILI
                 </p>
-                <p style="text-align: center;margin-bottom: 40px;">
-                    <b>Nomor :   /SKD/ NG-SMG /VIII/2023</b>
+                <p id="nomor" style="text-align: center; margin-bottom: 40px;">
+                    <b>Nomor : &nbsp; &nbsp; /SKD/ NG-SMG /VIII/2023</b>
                 </p>
                 <div style="text-indent: 30px">
                     <p>Yang bertanda tangan dibawah ini
@@ -191,3 +191,5 @@
         }
     });
 </script>
+
+

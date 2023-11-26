@@ -91,12 +91,12 @@
                     <tr>
                         <td>Nama</td>
                         <td>:</td>
-                        <td><b>{{ ucfirst($penduduk->nama) }}</b></td>
+                        <td><b>{{ ucwords(strtolower($penduduk->nama)) }}</b></td>
                     </tr>
                     <tr>
                         <td>Tempat/Tgl Lahir</td>
                         <td>:</td>
-                        <td>{{ ucfirst($penduduk->tmp_lahir) }}/{{ $penduduk->tgl_lahir }}</td>
+                        <td>{{ ucwords(strtolower($penduduk->tmp_lahir)) }}/{{ $penduduk->tgl_lahir }}</td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
@@ -112,17 +112,17 @@
                     <tr>
                         <td>Agama</td>
                         <td>:</td>
-                        <td>{{ ucfirst($penduduk->agama) }}</td>
+                        <td>{{ ucwords(strtolower($penduduk->agama)) }}</td>
                     </tr>
                     <tr>
                         <td>Pekerjaan</td>
                         <td>:</td>
-                        <td>{{ ucfirst($penduduk->pekerjaan) }}</td>
+                        <td>{{ ucwords(strtolower($penduduk->pekerjaan)) }}</td>
                     </tr>
                     <tr>
                         <td>Alamat Domisili</td>
                         <td>:</td>
-                        <td>{{ ucfirst($penduduk->alamat) }}</td>
+                        <td>{{ ucwords(strtolower($penduduk->alamat)) }}</td>
                     </tr>
                     <!-- Sisanya dari kode Anda -->
 
@@ -136,28 +136,28 @@
                     <tr>
                         <td>Nama</td>
                         <td>:</td>
-                        <td>{{ ucfirst($firstPengajuan->nama_orangtua) }}</td>
+                        <td>{{ ucwords(strtolower($firstPengajuan->nama_orangtua)) }}</td>
                     </tr>
                     <tr>
                         <td>Umur</td>
                         <td>:</td>
-                        <td>{{ ucfirst($firstPengajuan->umur_orangtua) }} Tahun</td>
+                        <td>{{ ucwords(strtolower($firstPengajuan->umur_orangtua)) }} Tahun</td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
                         <td>:</td>
-                        <td>{{ ucfirst($firstPengajuan->jekel_orangtua) }}</td>
+                        <td>{{ ucwords(strtolower($firstPengajuan->jekel_orangtua)) }}</td>
                     </tr>
                     <tr>
                         <td>Pekerjaan</td>
                         <td>:</td>
-                        <td>{{ ucfirst($firstPengajuan->pekerjaan_orangtua) }}</td>
+                        <td>{{ ucwords(strtolower($firstPengajuan->pekerjaan_orangtua)) }}</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td>Alamat</td>
                         <td>:</td>
                         <td>{{ ucfirst($firstPengajuan->alamat_orangtua) }}</td>
-                    </tr>
+                    </tr> --}}
                 </table>
 
                 <br>
@@ -180,10 +180,10 @@
 
                     <p>Koto Baru, {{ date('d', time()) }} {{ $indonesianMonth }} {{ date('Y', time()) }}</p>
 
-                    <p style="margin-right: 40px;">Kepala Desa Koto baru</p>
+                    <p style="margin-bottom: 60px">Kepala Desa Koto baru</p>
                     {{-- <img src="{{ asset('ttd-kepsek.png') }}" alt="Kota Pariaman"
                         style="margin-right: 35px;width: 120px; height: 100px;"> --}}
-                    <p style="font-weight: bold;margin-right: 70px;">Rezki Yuanda Putra</p>
+                    <p style="font-weight: bold">Rezki Yuanda Putra</p>
                 </div>
             @endif
         </div>
