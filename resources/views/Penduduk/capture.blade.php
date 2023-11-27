@@ -45,8 +45,12 @@
                     <canvas id="canvas" style="display: none" class="mt-3"></canvas>
                     <img id="capturedImage" style="display: none;">
                     <div class="d-flex">
-                        <button class="btn btn-primary mt-2 mr-1" id="captureButton" title="Ambil Foto"><li class="fas fa-camera"></li></button>
-                        <a href="{{ url('capture') }}" class="btn btn-success mt-2 mr-1" title="Simpan Gambar"><li class="fas fa-save"></li></a>
+                        <button class="btn btn-primary mt-2 mr-1" id="captureButton" title="Ambil Foto">
+                            <li class="fas fa-camera"></li>
+                        </button>
+                        <a href="{{ url('capture') }}" class="btn btn-success mt-2 mr-1" title="Simpan Gambar">
+                            <li class="fas fa-save"></li>
+                        </a>
                         <form action="{{ url('capture-delete/' . request()->segment(2)) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -60,6 +64,63 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        $(document).ready(function() {
+            const video = document.getElementById('webcam');
+            const canvas = document.getElementById('canvas');
+
+            const captureButton = document.getElementById('captureButton');
+
+            navigator.mediaDevices.getUserMedia({
+                    video: true
+                })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.log('Error accessing webcam: ' + error);
+                });
+
+            captureButton.addEventListener('click', function(e) {
+                canvas.style.display = 'block';
+                canvas.width = 650;
+                canvas.height = 500;
+                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                capturedImage.src = canvas.toDataURL('image/png');
+                capturedImage.style.display = 'none';
+
+                // Hide the video element
+                video.style.display = 'none';
+
+                // Convert canvas content to Blob
+                canvas.toBlob(function(blob) {
+                    const formData = new FormData();
+                    formData.append('image', blob, 'image.png');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/simpan-gambar',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // Handle success
+                            console.log(response);
+                        },
+                        error: function(error) {
+                            // Handle error
+                            console.log(error);
+                        }
+                    });
+                }, 'image/png');
+
+                e.stopImmediatePropagation();
+            });
+        });
+    </script>
+    {{-- <script>
         $(document).ready(function() {
             const video = document.getElementById('webcam');
             const canvas = document.getElementById('canvas');
@@ -106,7 +167,7 @@
                 e.stopImmediatePropagation();
             });
         });
-    </script>
+    </script> --}}
 
 
 @endsection
