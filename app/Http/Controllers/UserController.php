@@ -55,12 +55,14 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('pengguna.index');
+        $penggunas = User::where('role','<>','superadmin')->paginate(10);
+        return view('pengguna.index', compact('penggunas'));
     }
 
     public function create()
+    
     {
-        //
+        return view('pengguna.create');
     }
 
     /**
@@ -68,7 +70,36 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:2|confirmed|',
+            'password_confirmation' => 'required|min:2|same:password',
+            'role' => 'required'
+        ], [
+            'name.required' => 'Kolom nama wajib diisi',
+            'email.required' => 'Kolom email wajib diisi',
+            'email.unique' => 'Email sudah digunakan',
+            'password.required' => 'Password tidak boleh kosong',
+            'password.min' => 'Password minimal 6 karakter',
+            'password.confirmed' => 'Password tidak sama',
+            'password_confirmation.required' => 'Konfirmasi password tidak boleh kosong',
+            'password_confirmation.min' => 'Konfirmasi password minimal 6 karakter',
+            'password_confirmation.same' => 'Konfirmasi password tidak sama',
+        ]);
+        $validate['password'] = Hash::make($request->password);
+        $validate['password_confirmation'] = Hash::make($request->password_confirmation);
+
+        // dd($validate);
+
+        try {
+            User::create($validate);
+            Alert::success('Berhasil', 'Data berhasil ditambahkan');
+            return redirect('/pengguna');
+        } catch (\Throwable $e) {
+            Alert::error('Gagal', 'Data gagal ditambahkan');
+            return redirect('/pengguna');
+        }
     }
 
     /**

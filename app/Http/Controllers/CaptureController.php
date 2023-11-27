@@ -60,7 +60,8 @@ class CaptureController extends Controller
 
     public function store(Request $request)
     {
-        $image = $request->file('image');
+        $image = $request->file('image')->dd();
+        
         $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
 
         Capture::create(['file_gambar' => $result->getSecurePath()]);

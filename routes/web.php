@@ -36,7 +36,7 @@ Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 Route::middleware(['isLogin'])->group(function () {
   Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
   // Route::resource('penduduk', PendudukController::class);
-  Route::resource('user', UserController::class);
+  Route::resource('pengguna', UserController::class);
   Route::get('/penduduk', 'App\Http\Controllers\PendudukController@index');
   Route::get('/penduduk/create', 'App\Http\Controllers\PendudukController@create');
   Route::post('/penduduk', 'App\Http\Controllers\PendudukController@store');
