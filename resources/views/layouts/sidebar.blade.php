@@ -33,8 +33,6 @@
         <a href="{{ url('profilePenduduk/' . $penduduk->nik) }}" style="text-decoration: none;" class="fw-bold">{{ ucwords(strtolower(substr($penduduk->nama, 0, 15))) }}</a>
         <p>{{ $penduduk->nik }}</p>
         @endif
-
-
         @if (session()->has('admin'))
         @php
         $admin = session('admin');
@@ -86,12 +84,14 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+          @if ($admin->role == 'superadmin')
             <li class="nav-item">
-              <a href="{{ url('user') }}" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
+              <a href="{{ url('pengguna') }}" class="nav-link {{ Request::is('pengguna') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
-                <p>User</p>
+                <p>Admin</p>
               </a>
             </li>
+          @endif
             <li class="nav-item">
               <a href="{{ url('penduduk') }}" class="nav-link {{ Request::is('penduduk') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>

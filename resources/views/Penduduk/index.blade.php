@@ -5,22 +5,22 @@
 
 @section('container-fluid')
 
-    <!-- Loading Modal -->
-    <div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog modal-dialog-centered ">
-            <div class="modal-content ">
-                <div class="modal-body text-center">
-                    <img src="{{ asset('AdminLTE') }}/dist/img/loading.gif" width="200px" height="150px" style="background: rgba(255, 255, 255, 0);" />
-                    <p class="mt-2">Import Data Penduduk, Mohon Tunggu Sebentar...</p>
-                </div>
-            </div>
-        </div>
+<!-- Loading Modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog modal-dialog-centered ">
+    <div class="modal-content ">
+      <div class="modal-body text-center">
+        <img src="{{ asset('AdminLTE') }}/dist/img/loading.gif" width="200px" height="150px" style="background: rgba(255, 255, 255, 0);" />
+        <p class="mt-2">Import Data Penduduk, Mohon Tunggu Sebentar...</p>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="container">
+<div class="container">
 
-        <a href="/penduduk/create" class="btn btn-outline-success"><i class="fa-solid fas fa-plus"></i> Tambah Data
-            Penduduk</a>
+  <a href="/penduduk/create" class="btn btn-outline-success"><i class="fa-solid fas fa-plus"></i> Tambah Data
+    Penduduk</a>
 
         <div class="card card-outline card-success mt-3">
             <div class="card-header">
@@ -121,139 +121,137 @@
                 </div>
             </div>
 
-            <div class="card-footer clearfix">
-                {{ $penduduks->links('pagination::bootstrap-5') }}
-            </div>
-        </div>
-
-        <!-- Modal Import Data -->
-        <div class="modal fade" id="exampleModalExcle" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-center" id="exampleModalLabel">Penduduk</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/penduduk-excel" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="file" class="form-label">File Excel</label>
-                                <input type="file" class="form-control @error('file') is-invalid @enderror"
-                                    id="file" name="file" placeholder="File Excel" autofocus>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div class="card-footer clearfix">
+      {{ $penduduks->links('pagination::bootstrap-5') }}
     </div>
+  </div>
 
-    <!-- JavaScript section -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    {{-- Data Table --}}
-    <script>
-        // --------------DELETE USER----------------
-        $(document).on('click', '#btn-hapus', function(e) {
-            e.preventDefault();
-            var link = $(this).attr('data-id');
-            console.log(link);
+  <!-- Modal Import Data -->
+  <div class="modal fade" id="exampleModalExcle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel">Penduduk</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/penduduk-excel" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+              <label for="file" class="form-label">File Excel</label>
+              <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file" placeholder="File Excel" autofocus>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            Swal.fire({
-                title: 'Apakah Anda Yakin?',
-                text: "Data Akan di Hapus!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location = "/penduduk" + "/delete/" + link;
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
-                }
-            })
-        })
-    </script>
-    <!-- Tambahkan script ini sebelum </body> tag -->
-    <script>
-        // Fungsi untuk menangani data RFID
-        function handleRFID(uid) {
-            // Mengosongkan kolom UID
-            $("#uid-column").text("");
+</div>
 
-            // Jika UID tidak kosong, set nilai kolom UID
-            if (uid) {
-                $("#uid-column").text(uid);
-            }
-        }
+<!-- JavaScript section -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+{{-- Data Table --}}
+<script>
+  // --------------DELETE USER----------------
+  $(document).on('click', '#btn-hapus', function(e) {
+    e.preventDefault();
+    var link = $(this).attr('data-id');
+    console.log(link);
 
-        // Fungsi untuk mendeteksi pembacaan RFID (Contoh: event 'rfidDetected' di-trigger ketika RFID terdeteksi)
-        $(document).on('rfidDetected', function(event, uid) {
-            handleRFID(uid);
-        });
+    Swal.fire({
+      title: 'Apakah Anda Yakin?',
+      text: "Data Akan di Hapus!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = "/penduduk" + "/delete/" + link;
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
+  })
+</script>
+<!-- Tambahkan script ini sebelum </body> tag -->
+<script>
+  // Fungsi untuk menangani data RFID
+  function handleRFID(uid) {
+    // Mengosongkan kolom UID
+    $("#uid-column").text("");
 
-        // Dummy function untuk mensimulasikan deteksi RFID
-        function simulateRFIDDetection() {
-            // Simulasikan UID dari pembacaan RFID
-            var simulatedUID = "123456789";
+    // Jika UID tidak kosong, set nilai kolom UID
+    if (uid) {
+      $("#uid-column").text(uid);
+    }
+  }
 
-            // Trigger event untuk menangani RFID
-            $(document).trigger('rfidDetected', [simulatedUID]);
-        }
+  // Fungsi untuk mendeteksi pembacaan RFID (Contoh: event 'rfidDetected' di-trigger ketika RFID terdeteksi)
+  $(document).on('rfidDetected', function(event, uid) {
+    handleRFID(uid);
+  });
 
-        // Panggil fungsi untuk mensimulasikan deteksi RFID
-        simulateRFIDDetection();
-    </script>
-    <script>
-        // Show the loading spinner
-        function showLoadingSpinner() {
-            $('#loadingSpinner').show();
-        }
+  // Dummy function untuk mensimulasikan deteksi RFID
+  function simulateRFIDDetection() {
+    // Simulasikan UID dari pembacaan RFID
+    var simulatedUID = "123456789";
 
-        // Hide the loading spinner
-        function hideLoadingSpinner() {
-            $('#loadingSpinner').hide();
-        }
+    // Trigger event untuk menangani RFID
+    $(document).trigger('rfidDetected', [simulatedUID]);
+  }
 
-        // Trigger the loading spinner when the page is being loaded
-        $(document).ready(function() {
-            showLoadingSpinner();
-        });
+  // Panggil fungsi untuk mensimulasikan deteksi RFID
+  simulateRFIDDetection();
+</script>
+<script>
+  // Show the loading spinner
+  function showLoadingSpinner() {
+    $('#loadingSpinner').show();
+  }
 
-        // Trigger the loading spinner when the form is being submitted
-        $('form').submit(function() {
-            showLoadingSpinner();
-        });
-    </script>
-    <script>
-        // Existing JavaScript code
+  // Hide the loading spinner
+  function hideLoadingSpinner() {
+    $('#loadingSpinner').hide();
+  }
 
-        // Show the loading modal
-        function showLoadingModal() {
-            $('#loadingModal').modal('show');
-        }
+  // Trigger the loading spinner when the page is being loaded
+  $(document).ready(function() {
+    showLoadingSpinner();
+  });
 
-        // Hide the loading modal
-        function hideLoadingModal() {
-            $('#loadingModal').modal('hide');
-        }
+  // Trigger the loading spinner when the form is being submitted
+  $('form').submit(function() {
+    showLoadingSpinner();
+  });
+</script>
+<script>
+  // Existing JavaScript code
 
-        // Trigger the loading modal when the form is being submitted
-        $('#exampleModalExcle form').submit(function() {
-            showLoadingModal();
-        });
-    </script>
+  // Show the loading modal
+  function showLoadingModal() {
+    $('#loadingModal').modal('show');
+  }
+
+  // Hide the loading modal
+  function hideLoadingModal() {
+    $('#loadingModal').modal('hide');
+  }
+
+  // Trigger the loading modal when the form is being submitted
+  $('#exampleModalExcle form').submit(function() {
+    showLoadingModal();
+  });
+</script>
 
 
 @endsection
