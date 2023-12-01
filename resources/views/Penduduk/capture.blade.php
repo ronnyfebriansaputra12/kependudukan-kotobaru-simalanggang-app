@@ -95,6 +95,7 @@
                 canvas.toBlob(function(blob) {
                     const formData = new FormData();
                     formData.append('image', blob, 'image.png');
+                    formData.append('nik_penduduk', $('#nik_penduduk').val()); // Menambahkan nilai NIK
 
                     $.ajax({
                         type: 'POST',
