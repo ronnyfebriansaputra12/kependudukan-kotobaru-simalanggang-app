@@ -88,7 +88,7 @@
             <li class="nav-item">
               <a href="{{ url('pengguna') }}" class="nav-link {{ Request::is('pengguna') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
-                <p>Pengguna</p>
+                <p>Admin</p>
               </a>
             </li>
           @endif
