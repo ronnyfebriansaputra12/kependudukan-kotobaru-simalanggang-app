@@ -23,12 +23,12 @@
                                     <label for="uid" class="form-label">UID</label>
                                     <input type="number" class="form-control @error('uid') is-invalid @enderror"
                                         id="uid" value="{{ old('uid', $penduduk->uid) }}" name="uid" autofocus
-                                        required>
-                                    @error('uid')
+                                        >
+                                    {{-- @error('uid')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -87,8 +87,8 @@
                                 <div class="mb-4">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        id="password" value="{{ old('password') }}" name="password"
-                                        placeholder="Password Anda" autofocus required>
+                                        id="password" value="123456" name="password"
+                                         autofocus required readonly>
                                 </div>
                                 @error('password')
                                     <div class="invalid-feedback">
@@ -102,8 +102,8 @@
                                         Confirmation</label>
                                     <input type="password"
                                         class="form-control @error('password_confirmation') is-invalid @enderror"
-                                        id="password_confirmation" value="{{ old('password_confirmation') }}"
-                                        name="password_confirmation" placeholder="Pastikan Password Sama" autofocus
+                                        id="password_confirmation" value="123456"
+                                        name="password_confirmation" autofocus readonly
                                         required>
                                 </div>
                                 @error('password_confirmation')

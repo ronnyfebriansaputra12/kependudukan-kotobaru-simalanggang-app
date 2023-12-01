@@ -84,7 +84,7 @@
                                         <td>{{ ucwords($value->no_kk) }}</td>
                                         <td>{{ ucwords(strtolower($value->nama)) }}</td>
                                         <td>{{ ucwords(strtolower($value->jekel)) }}</td>
-                                        <td>{{ ucwords(strtolower($value->alamat)) }}</td>
+                                        <td>{{ ucwords(strtolower($value->dusun)) }}</td>
                                         <td>
                                             <div class="d-flex">
                                                 @if ($value->uid !== null)

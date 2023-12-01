@@ -47,7 +47,7 @@ class PendudukController extends Controller
         $validate = $request->validate(
             [
 
-                'uid' => 'required|unique:penduduks|min:10|numeric',
+                'uid' => 'nullable|unique:penduduks|min:10|numeric',
                 'nik' => 'required|unique:penduduks|min:16|numeric',
                 'nama' => 'required',
                 'no_kk' => 'required|nullable|min:16|numeric',
@@ -65,7 +65,7 @@ class PendudukController extends Controller
 
             ],
             [
-                'uid.required' => 'uid tidak boleh kosong',
+                // 'uid.required' => 'uid tidak boleh kosong',
                 'nik.unique' => 'NIK sudah terdaftar',
                 'nik.max' => 'NIK maksimal 16 karakter',
                 'nik.min' => 'NIK minimal 16 karakter',
@@ -111,7 +111,7 @@ class PendudukController extends Controller
 
         try {
 
-        
+
 
             Penduduk::create($validate);
             Alert::success('Berhasil', 'Data berhasil ditambahkan');
@@ -153,7 +153,7 @@ class PendudukController extends Controller
     {
         $penduduk = Penduduk::findOrFail($nik);
         $validate = $request->validate([
-            'uid' => 'required',
+            'uid' => 'nullable',
             'nik' => 'required|min:16|numeric|unique:penduduks,nik,' . $penduduk->nik . ',' . $penduduk->getKeyName(),
             'nama' => 'required',
             'no_kk' => 'required|nullable|min:16|numeric',
