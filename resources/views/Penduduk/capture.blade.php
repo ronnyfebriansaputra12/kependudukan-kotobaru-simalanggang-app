@@ -7,6 +7,7 @@
 @endsection
 @section('breadcrumb', 'Verifikasi Penduduk')
 @section('container-fluid')
+    <!-- CSS styles -->
     <style>
         .vidio-container {
             display: flex;
@@ -14,23 +15,19 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            /* Sesuaikan dengan kebutuhan Anda */
         }
 
         #webcam {
             width: 100%;
-            /* Agar video menutupi seluruh lebar card */
             max-width: 600px;
-            /* Sesuaikan dengan kebutuhan Anda */
         }
 
         #captureButton {
             margin-top: 10px;
-            /* Sesuaikan dengan kebutuhan Anda */
         }
     </style>
-    <div class="container">
 
+    <div class="container">
         <div class="card">
             <div class="card-header">
                 @foreach ($capture as $item)
@@ -62,72 +59,18 @@
         </div>
     </div>
 
+    <!-- JavaScript scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            const video = document.getElementById('webcam');
-            const canvas = document.getElementById('canvas');
-
-            const captureButton = document.getElementById('captureButton');
-
-            navigator.mediaDevices.getUserMedia({
-                    video: true
-                })
-                .then(function(stream) {
-                    video.srcObject = stream;
-                })
-                .catch(function(error) {
-                    console.log('Error accessing webcam: ' + error);
-                });
-
-            captureButton.addEventListener('click', function(e) {
-                canvas.style.display = 'block';
-                canvas.width = 650;
-                canvas.height = 500;
-                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-                capturedImage.src = canvas.toDataURL('image/png');
-                capturedImage.style.display = 'none';
-
-                // Hide the video element
-                video.style.display = 'none';
-
-                // Convert canvas content to Blob
-                canvas.toBlob(function(blob) {
-                    const formData = new FormData();
-                    formData.append('image', blob, 'image.png');
-                    formData.append('nik_penduduk', $('#nik_penduduk').val()); // Menambahkan nilai NIK
-
-                    $.ajax({
-                        type: 'POST',
-                        url: '/simpan-gambar',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            // Handle success
-                            console.log(response);
-                        },
-                        error: function(error) {
-                            // Handle error
-                            console.log(error);
-                        }
-                    });
-                }, 'image/png');
-
-                e.stopImmediatePropagation();
-            });
-        });
-    </script>
-    {{-- <script>
         $(document).ready(function() {
             const video = document.getElementById('webcam');
             const canvas = document.getElementById('canvas');
             const capturedImage = document.getElementById('capturedImage');
             const captureButton = document.getElementById('captureButton');
 
+            // Mengambil CSRF token dari meta tag
+            const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
             navigator.mediaDevices.getUserMedia({
                     video: true
                 })
@@ -138,37 +81,67 @@
                     console.log('Error accessing webcam: ' + error);
                 });
 
-
             captureButton.addEventListener('click', function(e) {
-                canvas.style.display = 'block';
-                canvas.width = 650;
-                canvas.height = 500;
-                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-                capturedImage.src = canvas.toDataURL('image/png');
-                capturedImage.style.display = 'none';
-
-                // Hide the video element
-                video.style.display = 'none';
+                const nikPenduduk = $('#nik_penduduk').val();
 
                 $.ajax({
                     type: 'POST',
-                    url: '/simpan-gambar',
+                    url: '/check-nik-exists',
                     data: {
-                        file_gambar: capturedImage.src,
-                        nik_penduduk: $('#nik_penduduk').val()
+                        'nik_penduduk': nikPenduduk
                     },
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'X-CSRF-TOKEN': csrfToken
                     },
                     success: function(response) {
-                        // window.location = '/capture';
-                        // console.log(response);
+                        if (response.exists) {
+                            alert(
+                                'Foto untuk NIK anda sudah terdaftar.'
+                                );
+                        } else {
+                            canvas.style.display = 'block';
+                            canvas.width = video.videoWidth;
+                            canvas.height = video.videoHeight;
+                            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas
+                                .height);
+                            capturedImage.src = canvas.toDataURL('image/png');
+                            capturedImage.style.display = 'none';
+
+                            video.style.display = 'none';
+
+                            canvas.toBlob(function(blob) {
+                                const formData = new FormData();
+                                formData.append('image', blob, 'image.png');
+                                formData.append('nik_penduduk', nikPenduduk);
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/simpan-gambar',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    headers: {
+                                        'X-CSRF-TOKEN': csrfToken
+                                    },
+                                    success: function(response) {
+                                        console.log(response);
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                    }
+                                });
+                            }, 'image/png');
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
                     }
                 });
+
                 e.stopImmediatePropagation();
             });
         });
-    </script> --}}
+    </script>
 
 
 @endsection
