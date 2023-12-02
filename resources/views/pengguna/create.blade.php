@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('title', 'Tambah Pengguna')
-@section('header', ' Form Tambah Data Pengguna')
+@section('title', 'Tambah Admin')
+@section('header', ' Form Tambah Data Admin')
 @section('link')
-<a href="{{ url('pengguna') }}">Pengguna</a>
+<a href="{{ url('pengguna') }}">Admin</a>
 @endsection
-@section('breadcrumb', 'Tambah Pengguna')
+@section('breadcrumb', 'Tambah Admin')
 
 @section('container-fluid')
 <!-- Loading Modal -->
@@ -15,7 +15,7 @@
         <div class="spinner-border text-success" role="status">
           <span class="sr-only">Loading...</span>
         </div>
-        <p class="mt-2">Menambahkan Data Pengguna...</p>
+        <p class="mt-2">Menambahkan Data Admin...</p>
       </div>
     </div>
   </div>

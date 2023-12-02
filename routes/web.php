@@ -48,6 +48,7 @@ Route::middleware(['isLogin'])->group(function () {
   Route::post('/penduduk-excel', [PendudukController::class, 'importExcel']);
 
   Route::get('/capture/{nik}', 'App\Http\Controllers\CaptureController@index');
+  Route::post('/check-nik-exists', 'App\Http\Controllers\CaptureController@checkNikExists');
   Route::get('/capture', 'App\Http\Controllers\CaptureController@captureData');
   Route::delete('/capture-delete/{nik}', 'App\Http\Controllers\CaptureController@deleteCapture');
   Route::post('/simpan-gambar', 'App\Http\Controllers\CaptureController@store');

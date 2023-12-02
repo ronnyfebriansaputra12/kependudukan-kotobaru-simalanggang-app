@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Pengguna')
-@section('header', 'Data Pengguna')
-@section('breadcrumb', 'Pengguna')
+@section('title', 'Admin')
+@section('header', 'Data Admin')
+@section('breadcrumb', 'Admin')
 
 @section('container-fluid')
 
 <div class="container">
-  <a href="{{url('/pengguna/create')}}" class="btn btn-outline-success"><i class="fa-solid fas fa-plus"></i> Tambah Data Pengguna</a>
+  <a href="{{url('/pengguna/create')}}" class="btn btn-outline-success"><i class="fa-solid fas fa-plus"></i> Tambah Data Admin</a>
   <div class="card card-outline card-success mt-3">
     <div class="card-body">
       <div id="example_wrapper">
